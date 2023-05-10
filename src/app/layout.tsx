@@ -2,6 +2,10 @@ import './globals.css';
 
 import { Inter } from 'next/font/google';
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  require('../mocks');
+}
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
