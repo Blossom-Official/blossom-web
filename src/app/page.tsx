@@ -13,7 +13,7 @@ export default function Home() {
       .then(setReviews);
   };
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
+    <main>
       <button onClick={handleGetReviews}>Load reviews</button>
       {reviews && (
         <ul>
