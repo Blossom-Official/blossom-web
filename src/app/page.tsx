@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { useState } from 'react';
 
 import { Review } from '@/mocks/types';
@@ -15,6 +16,8 @@ export default function Home() {
   return (
     <main>
       <button onClick={handleGetReviews}>Load reviews</button>
+      <Link href='/signin'>Login</Link>
+      <Link href='/logout'>logout</Link>
       {reviews && (
         <ul>
           {reviews.map((review) => (
