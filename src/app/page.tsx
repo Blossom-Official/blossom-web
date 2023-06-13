@@ -14,7 +14,7 @@ export default function Home() {
       .then(setReviews);
   };
   return (
-    <main>
+    <>
       <button
         className="text-3xl font-bold underline "
         onClick={handleGetReviews}
@@ -33,6 +33,6 @@ export default function Home() {
           ))}
         </ul>
       )}
-    </main>
+    </>
   );
 }
