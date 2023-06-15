@@ -1,11 +1,23 @@
 "use client";
 import Link from "next/link";
 
+import { SvgIcon } from "@/common/components/svg-icon";
+
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col justify-center bg-green-800 p-20">
       <Link href="/signin">Login</Link>
       <Link href="/logout">logout</Link>
+      {/* 네비게이션 바 제작 */}
+      <button>
+        <SvgIcon
+          aria-labelledby="메뉴 버튼"
+          height="22"
+          id="menu"
+          role="img"
+          width="22"
+        />
+      </button>
 
       <section className="mb-50 w-full text-white">
         <p className="text-center">마음을 피워요</p>
