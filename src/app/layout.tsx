@@ -20,6 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <link as="image" href="/sprite.svg" rel="preload" type="image/svg+xml" />
       <body className={inter.className}>
         <main className="relative mx-auto min-h-[100vh] max-w-[44rem] bg-white shadow-lg">
           {children}

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "make-sprite": "rm public/sprite.svg && svgstore -o public/sprite.svg public/icons/**/*.svg"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.5",
@@ -20,6 +21,8 @@
     "next": "13.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "svgstore": "^3.0.1",
+    "svgstore-cli": "^2.0.1",
     "typescript": "5.0.4"
   },
   "devDependencies": {
