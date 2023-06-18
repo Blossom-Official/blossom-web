@@ -7,7 +7,7 @@ export default function SigninLayout({
 }) {
   return (
     <>
-      <section className="relative flex min-h-screen flex-col justify-center bg-green-800 px-20">
+      <section className="relative flex min-h-screen flex-col justify-center bg-[url('/images/background-image.png')] px-20">
         {children}
       </section>
     </>
