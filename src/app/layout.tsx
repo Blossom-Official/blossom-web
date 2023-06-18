@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 
 import { OverlayProvider } from "@/common/hooks";
+import { QueryClientProvider } from "@/common/react-query";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   require("../mocks");
@@ -24,11 +25,13 @@ export default function RootLayout({
     <html lang="en">
       <link as="image" href="/sprite.svg" rel="preload" type="image/svg+xml" />
       <body className={inter.className}>
-        <OverlayProvider>
-          <main className="relative mx-auto min-h-[100vh] max-w-[44rem] bg-white shadow-lg">
-            {children}
-          </main>
-        </OverlayProvider>
+        <QueryClientProvider>
+          <OverlayProvider>
+            <main className="relative mx-auto min-h-[100vh] max-w-[44rem] bg-white shadow-lg">
+              {children}
+            </main>
+          </OverlayProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );
