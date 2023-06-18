@@ -1,5 +1,11 @@
 import type { Ref } from "react";
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from "react";
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 
 import type { CreateOverlayElement } from "./types";
 
@@ -14,7 +20,7 @@ export interface OverlayControlRef {
 
 export const OverlayController = forwardRef(function OverlayController(
   { overlayElement: OverlayElement, onExit }: Props,
-  ref: Ref<OverlayControlRef>,
+  ref: Ref<OverlayControlRef>
 ) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,7 +31,7 @@ export const OverlayController = forwardRef(function OverlayController(
     () => {
       return { close: handleClose };
     },
-    [handleClose],
+    [handleClose]
   );
 
   useEffect(() => {

@@ -1,3 +1,4 @@
+"use client";
 import type { PropsWithChildren, ReactNode } from "react";
 import React, { createContext, useCallback, useMemo, useState } from "react";
 
@@ -10,7 +11,9 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 export const OverlayProvider = ({ children }: PropsWithChildren) => {
-  const [overlayById, setOverlayById] = useState<Map<string, ReactNode>>(new Map());
+  const [overlayById, setOverlayById] = useState<Map<string, ReactNode>>(
+    new Map()
+  );
 
   const mount = useCallback((id: string, element: ReactNode) => {
     setOverlayById((overlayById) => {
