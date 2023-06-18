@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 
+import { Photo } from "@/common/components/photo";
+
 export default function Signin() {
   const router = useRouter();
 
@@ -22,12 +24,14 @@ export default function Signin() {
         <span className="h-px w-full flex-1 bg-white"></span>
       </section>
 
-      <button
-        className="w-full rounded-10 bg-yellow-300 py-10"
-        type="button"
-        onClick={handleButtonClick}
-      >
-        카카오 로그인
+      <button type="button" onClick={handleButtonClick}>
+        <Photo
+          alt="카카오 로그인 버튼"
+          className="m-auto"
+          height="45"
+          src="/images/kakao-login.png"
+          width="300"
+        />
       </button>
     </>
   );

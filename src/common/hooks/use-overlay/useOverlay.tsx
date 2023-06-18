@@ -1,3 +1,5 @@
+"use client";
+
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 
 import type { OverlayControlRef } from "./OverlayController";
@@ -44,7 +46,7 @@ export function useOverlay({ exitOnUnmount = true }: Options = {}) {
             onExit={() => {
               unmount(id);
             }}
-          />,
+          />
         );
       },
       close: () => {
@@ -54,6 +56,6 @@ export function useOverlay({ exitOnUnmount = true }: Options = {}) {
         unmount(id);
       },
     }),
-    [id, mount, unmount],
+    [id, mount, unmount]
   );
 }

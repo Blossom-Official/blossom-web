@@ -1,12 +1,12 @@
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
-import { PROXY_PREFIX } from '@/common/constants';
+import { PROXY_PREFIX } from "@/common/constants";
 
 const serviceEndpoint = process.env.NEXT_PUBLIC_SERVICE_ENDPOINT;
 const serviceSubfix = process.env.NEXT_PUBLIC_SERVICE_API_SUBFIX;
-const isProd = process.env.NODE_ENV === 'production';
-const preventedPaths = ['/signin'];
+const isProd = process.env.NODE_ENV === "production";
+const preventedPaths = ["/signin"];
 
 interface AuthResponse {
   code: string;
@@ -33,80 +33,87 @@ export async function middleware(request: NextRequest) {
     const destination = `${serviceEndpoint}${pathname}${search}`;
     const headers = new Headers(request.headers);
     if (blossomToken) {
-      headers.set('Authorization', `Bearer ${blossomToken.value}`);
+      headers.set("Authorization", `Bearer ${blossomToken.value}`);
     }
 
     return NextResponse.rewrite(destination, { request: { headers } });
   }
 
   // 로그인 리다이렉트
-  if (request.nextUrl.pathname.startsWith('/signin/redirect')) {
-    const code = request.nextUrl.searchParams.get('code') ?? '';
+  if (request.nextUrl.pathname.startsWith("/signin/redirect")) {
+    const code = request.nextUrl.searchParams.get("code") ?? "";
     if (code) {
       const kakaoAccessToken = await getKakaoToken(code);
       if (kakaoAccessToken) {
         try {
           const body = {
-            socialType: 'KAKAO',
+            socialType: "KAKAO",
             token: kakaoAccessToken,
           };
-          const response = await checkedFetch(
+          const response = await fetch(
             `${serviceEndpoint}${serviceSubfix}/auth/login`,
             {
-              method: 'POST',
+              method: "POST",
               headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
               },
               body: JSON.stringify(body),
             }
           );
-          const { data }: AuthResponse = await response.json();
+          // 404여도 저절로 error를 던지지 않음
+          // 대신 response.ok를 이용함
+          const { code, data }: AuthResponse = await response.json();
+          if (!response.ok) {
+            throw new Error(code);
+          }
           const isJwtVerified = Boolean(data.accessToken);
-          console.log({ data });
-          const nextUrl = request.nextUrl.clone();
-          nextUrl.pathname = isJwtVerified ? '/' : '/signin';
-          nextUrl.search = '';
-          const redirectResponse = NextResponse.redirect(nextUrl);
 
+          const nextUrl = request.nextUrl.clone();
+          nextUrl.pathname = isJwtVerified ? "/" : "/signin";
+          nextUrl.search = "";
+          const redirectResponse = NextResponse.redirect(nextUrl);
           if (isJwtVerified) {
             redirectResponse.cookies.set(
               process.env.NEXT_PUBLIC_BLOSSOM_TOKEN_KEY,
               data.accessToken,
               {
                 httpOnly: true,
-                sameSite: 'strict',
-                path: '/',
+                sameSite: "strict",
+                path: "/",
                 secure: isProd,
               }
             );
           }
           return redirectResponse;
         } catch (error: any) {
-          console.log(error);
           // NOTE: 로그인 에러 처리
-          if (error.message === 'N002') {
+          if (error.message === "N002") {
             // 회원이 아님 -> 회원가입 요청 보냄
             try {
               const body = {
-                socialType: 'KAKAO',
+                socialType: "KAKAO",
                 token: kakaoAccessToken,
               };
-              const response = await checkedFetch(
+              const response = await fetch(
                 `${serviceEndpoint}${serviceSubfix}/auth/signup`,
                 {
-                  method: 'POST',
+                  method: "POST",
                   headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                   },
                   body: JSON.stringify(body),
                 }
               );
-              const { data }: AuthResponse = await response.json();
+
+              const { code, data }: AuthResponse = await response.json();
+              if (!response.ok) {
+                throw new Error(code);
+              }
               const isJwtVerified = Boolean(data.accessToken);
 
               const nextUrl = request.nextUrl.clone();
-              nextUrl.pathname = isJwtVerified ? '/' : 'signin';
-              nextUrl.search = '';
+              nextUrl.pathname = isJwtVerified ? "/" : "signin";
+              nextUrl.search = "";
               const redirectResponse = NextResponse.redirect(nextUrl);
 
               if (isJwtVerified) {
@@ -115,8 +122,8 @@ export async function middleware(request: NextRequest) {
                   data.accessToken,
                   {
                     httpOnly: true,
-                    sameSite: 'strict',
-                    path: '/',
+                    sameSite: "strict",
+                    path: "/",
                     secure: isProd,
                   }
                 );
@@ -126,8 +133,8 @@ export async function middleware(request: NextRequest) {
               // TODO: 회원가입 에러 처리
             }
           } else {
-            request.nextUrl.pathname = '/';
-            request.nextUrl.search = '';
+            request.nextUrl.pathname = "/";
+            request.nextUrl.search = "";
             return NextResponse.redirect(request.nextUrl);
           }
         }
@@ -135,14 +142,14 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if (request.nextUrl.pathname.startsWith('/logout')) {
+  if (request.nextUrl.pathname.startsWith("/logout")) {
     const nextUrl = request.nextUrl.clone();
-    nextUrl.pathname = '/';
-    nextUrl.search = '';
+    nextUrl.pathname = "/";
+    nextUrl.search = "";
 
     const response = NextResponse.redirect(nextUrl);
-    response.cookies.set(process.env.NEXT_PUBLIC_BLOSSOM_TOKEN_KEY, '', {
-      expires: new Date('Thu, 01 Jan 1999 00:00:10 GMT'),
+    response.cookies.set(process.env.NEXT_PUBLIC_BLOSSOM_TOKEN_KEY, "", {
+      expires: new Date("Thu, 01 Jan 1999 00:00:10 GMT"),
     });
 
     return response;
@@ -157,8 +164,8 @@ export async function middleware(request: NextRequest) {
       )
     ) {
       const nextUrl = request.nextUrl.clone();
-      nextUrl.pathname = '/';
-      nextUrl.search = '';
+      nextUrl.pathname = "/";
+      nextUrl.search = "";
 
       return NextResponse.redirect(nextUrl);
     }
@@ -172,18 +179,9 @@ const getKakaoToken = async (code: string) => {
     }&redirect_uri=${encodeURIComponent(
       process.env.NEXT_PUBLIC_REDIRECT_URI
     )}&code=${code}`,
-    { method: 'POST' }
+    { method: "POST" }
   );
   const { access_token: token } = await response.json();
 
   return token;
-};
-
-const checkedFetch: typeof fetch = async (input, init) => {
-  const response = await fetch(input, init);
-
-  if (!response.ok) {
-    throw new Error('Request failed: ' + response.status);
-  }
-  return response;
 };
