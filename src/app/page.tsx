@@ -2,14 +2,26 @@
 import Link from "next/link";
 
 import { SvgIcon } from "@/common/components/svg-icon";
+import { useOverlay } from "@/common/hooks";
+
+import Sidebar from "./components/Sidebar";
 
 export default function Home() {
+  const overlay = useOverlay();
+
   return (
     <div className="flex min-h-screen flex-col justify-center bg-green-800 p-20">
       <Link href="/signin">Login</Link>
       <Link href="/logout">logout</Link>
       {/* 네비게이션 바 제작 */}
-      <button>
+      <button
+        type="button"
+        onClick={() => {
+          overlay.open(({ isOpen, close }) => (
+            <Sidebar isOpen={isOpen} onClose={close} />
+          ));
+        }}
+      >
         <SvgIcon
           aria-labelledby="메뉴 버튼"
           height="22"
