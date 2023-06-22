@@ -1,3 +1,5 @@
+'use client'
+
 import type { DehydratedState } from "@tanstack/react-query";
 import {
   Hydrate,
