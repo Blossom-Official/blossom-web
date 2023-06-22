@@ -224,6 +224,11 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.2.0.tgz#8be36a1f66f3265389e90b5f9c9962146758f728"
   integrity sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==
 
+"@suspensive/react@^1.11.1":
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/@suspensive/react/-/react-1.11.1.tgz#c327c8fc25a9ff040a5b2683986adf02598bb545"
+  integrity sha512-uNY+0d1vBcgpc+P2PkNdaVzdFKt/HJShLhaNXZ3dSVIpIwvmesRq91bUUNzxKr7ucQzewlSlWplLVjy/FnCOoA==
+
 "@swc/helpers@0.5.1":
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.5.1.tgz#e9031491aa3f26bfcc974a67f48bd456c8a5357a"
