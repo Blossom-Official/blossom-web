@@ -49,11 +49,9 @@ export default function RootLayout({
       <link as='image' href='/sprite.svg' rel='preload' type='image/svg+xml' />
       <body className={`${lemonMilk.variable} ${pretendard.variable}`}>
         <QueryClientProvider>
-          <OverlayProvider>
-            <main className='relative mx-auto min-h-[100vh] max-w-[44rem] bg-white font-pretendard shadow-lg'>
-              {children}
-            </main>
-          </OverlayProvider>
+          <main className='relative mx-auto min-h-[100vh] max-w-[44rem] bg-white font-pretendard shadow-lg'>
+            <OverlayProvider>{children}</OverlayProvider>
+          </main>
         </QueryClientProvider>
       </body>
     </html>
