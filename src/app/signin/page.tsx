@@ -7,7 +7,7 @@ import { Photo } from '@/common/components/photo';
 export default function Signin() {
   const router = useRouter();
 
-  const handleButtonClick = async () => {
+  const handleButtonClick = () => {
     router.push('/api/auth/signin');
   };
 
