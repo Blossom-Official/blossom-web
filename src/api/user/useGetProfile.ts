@@ -22,13 +22,10 @@ export const useGetProfile = () => {
     queryKey: useGetProfile.queryKey,
     queryFn: useGetProfile.queryFn,
     select: (response) => {
-      const { data } = response;
-      console.log(data);
-      if (response) {
-        const { data } = response;
-        return data.data;
-      }
-      return response;
+      const {
+        data: { data },
+      } = response;
+      return data;
     },
     onError: (error: any) => {
       queryClient.setQueryData<BaseResponse<Response>>(
