@@ -15,7 +15,7 @@ export default function Signin() {
   const router = useRouter();
 
   useEffect(() => {
-    async function processKakaoRedirect() {
+    (async () => {
       const code = new URLSearchParams(location.search).get('code') ?? '';
       if (code) {
         const kakaoAccessToken = await getKakaoToken(code);
@@ -56,8 +56,7 @@ export default function Signin() {
             });
         }
       }
-    }
-    processKakaoRedirect();
+    })();
   }, [router]);
 
   return <></>;
