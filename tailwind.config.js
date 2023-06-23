@@ -30,7 +30,7 @@ module.exports = {
         blue: '#7A7EA4',
       },
       fontSize: {
-        '24-bold-25': [
+        '24-bold-24': [
           '2.4rem',
           { lineHeight: '24px', letterSpacing: '0em', fontWeight: '700' },
         ],
@@ -42,9 +42,17 @@ module.exports = {
           '2.4rem',
           { lineHeight: '32px', letterSpacing: '0em', fontWeight: '700' },
         ],
-        '14-bold-24': [
+        '14-light-24': [
           '1.4rem',
           { lineHeight: '24px', letterSpacing: '0em', fontWeight: '300' },
+        ],
+        '20-semibold-24': [
+          '2.0rem',
+          { lineHeight: '24px', letterSpacing: '0em', fontWeight: '600' },
+        ],
+        '24-semibold-24': [
+          '2.4rem',
+          { lineHeight: '24px', letterSpacing: '0em', fontWeight: '600' },
         ],
       },
       fontFamily: {

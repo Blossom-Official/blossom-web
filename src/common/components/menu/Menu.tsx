@@ -1,10 +1,10 @@
-"use client";
-import { ComponentProps } from "react";
+'use client';
+import { ComponentProps, ReactNode } from 'react';
 
-import { SvgIcon } from "../svg-icon";
-import { MenuProvider, useMenuContext } from "./MenuProvider";
+import { SvgIcon } from '../svg-icon';
+import { MenuProvider, useMenuContext } from './MenuProvider';
 
-interface MenuProps extends ComponentProps<"nav"> {
+interface MenuProps extends ComponentProps<'nav'> {
   isOpen: boolean;
   onClose: () => void;
 }
@@ -21,37 +21,49 @@ const Menu = ({ children, isOpen, onClose, className, ...rest }: MenuProps) => {
   );
 };
 
-type MenuHeaderProps = ComponentProps<"div">;
-const MenuHeader = ({ children, className = "", ...rest }: MenuHeaderProps) => {
+interface MenuHeaderProps extends ComponentProps<'div'> {
+  leftComponent?: ReactNode;
+  rightComponent?: ReactNode;
+}
+const MenuHeader = ({
+  className = '',
+  leftComponent,
+  rightComponent,
+  ...rest
+}: MenuHeaderProps) => {
   const context = useMenuContext();
 
   return (
-    <div {...rest} className={`flex ${className}`}>
-      <button
-        type="button"
-        onClick={() => {
-          context.onClose();
-        }}
-      >
-        <SvgIcon
-          aria-labelledby="메뉴 닫기"
-          height="24"
-          id="menu-out"
-          role="img"
-          width="24"
-        />
-      </button>
-      <div className="grow">{children}</div>
+    <div {...rest} className={`relative ${className}`}>
+      <div className='absolute left-20'>
+        {leftComponent ?? (
+          <button
+            type='button'
+            onClick={() => {
+              context.onClose();
+            }}
+          >
+            <SvgIcon
+              aria-labelledby='메뉴 닫기'
+              height='24'
+              id='menu-out'
+              role='img'
+              width='24'
+            />
+          </button>
+        )}
+      </div>
+      <div className='absolute right-20'>{rightComponent}</div>
     </div>
   );
 };
 
-type MenuListProps = ComponentProps<"ul">;
+type MenuListProps = ComponentProps<'ul'>;
 const MenuList = ({ children, ...rest }: MenuListProps) => {
   return <ul {...rest}>{children}</ul>;
 };
 
-type MenuItemProps = ComponentProps<"li">;
+type MenuItemProps = ComponentProps<'li'>;
 const MenuItem = ({ children, ...rest }: MenuItemProps) => {
   return <li {...rest}>{children}</li>;
 };

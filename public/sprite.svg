@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs/><symbol id="login" viewBox="0 0 24 24">
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs/><symbol id="done" viewBox="0 0 24 24">
+<path d="M3 12.129L8.6 18L21 5" stroke="white"/>
+</symbol><symbol id="login" viewBox="0 0 24 24">
 <path d="M10.5 17L15.5 17L15.5 7L10.5 7" stroke="white"/>
 <path d="M5 12L11 12" stroke="white"/>
 <path d="M8 8.5L11.5 12L8 15.5" stroke="white"/>
@@ -7,6 +9,10 @@
 <path d="M18.7781 5L4.63594 19.1421" stroke="white"/>
 </symbol><symbol id="menu" viewBox="0 0 24 24">
 <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z" fill="#8E9A78"/>
+</symbol><symbol id="pencil" viewBox="0 0 24 24">
+<path d="M17.6673 8.33274L19.7886 6.21142L17.6673 4.0901L15.5459 6.21142M17.6673 8.33274L8.12132 17.8787L4.93934 18.9393L6 15.7574L15.5459 6.21142M17.6673 8.33274L15.5459 6.21142" stroke="#BCBCBC"/>
 </symbol><symbol id="polygon" viewBox="0 0 96 96">
 <path d="M48 0L72 6.43078L89.5692 24L96 48L89.5692 72L72 89.5692L48 96L24 89.5692L6.43078 72L0 48L6.43078 24L24 6.43078L48 0Z" fill="#333A29"/>
+</symbol><symbol id="right-arrow" viewBox="0 0 24 24">
+<path d="M7 11.4063H16.2286V12.5938H7V11.4063ZM11.6571 16.1563L15.4571 12L11.6571 7.84375L12.4286 7L17 12L12.4286 17L11.6571 16.1563Z" fill="#8E9A78"/>
 </symbol></svg>
