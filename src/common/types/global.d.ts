@@ -10,6 +10,5 @@ declare namespace NodeJS {
     NEXT_PUBLIC_REDIRECT_URI: string;
     NEXT_PUBLIC_SERVICE_ENDPOINT: string;
     NEXT_PUBLIC_SERVICE_API_SUBFIX: string;
-    NEXT_PUBLIC_BLOSSOM_TOKEN_KEY: string;
   }
 }
