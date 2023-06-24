@@ -1,18 +1,19 @@
 'use client';
 
-import { ComponentProps, useState } from 'react';
+import { ComponentProps } from 'react';
 
 import { usePutProfileNickname } from '@/api/user';
 import { Input } from '@/common/components/input';
 import { Menu } from '@/common/components/menu';
 import { SvgIcon } from '@/common/components/svg-icon';
+import { useInputState } from '@/common/hooks';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
 const EditProfileName = ({ isOpen, onClose }: Props) => {
-  const [nickname, setNickname] = useState('');
+  const [nickname, setNickname, handleChangeNickname] = useInputState('');
   const { handleSubmit } = usePutProfileNickname(nickname);
 
   return (
@@ -25,10 +26,12 @@ const EditProfileName = ({ isOpen, onClose }: Props) => {
         <Input
           className='border-b border-b-white py-12 text-24-semibold-24 text-white'
           inputClassName='bg-transparent text-center'
-          rightComponent={<DeleteButton onClick={() => setNickname('')} />}
           type='text'
           value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
+          rightComponent={
+            <DeleteButton onClick={() => setNickname('')} />
+          }
+          onChange={handleChangeNickname}
         />
       </form>
     </Menu>
