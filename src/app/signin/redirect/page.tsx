@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { AuthService, http } from '@/api/core/axios';
-import { BaseResponse } from '@/api/core/types';
+import { RequestSuccess } from '@/api/core/types';
 
 interface Response {
   accessToken: string;
@@ -21,15 +21,13 @@ export default function Signin() {
         const kakaoAccessToken = await getKakaoToken(code);
         if (kakaoAccessToken) {
           await http
-            .post<BaseResponse<Response>>('/auth/login', {
+            .post('/auth/login', {
               data: { socialType: 'KAKAO', token: kakaoAccessToken },
             })
-            .then(({ data }) => {
-              const {
-                data: { accessToken, refreshToken },
-              } = data;
-              AuthService.setAccessToken(accessToken);
-              AuthService.setRefreshToken(refreshToken);
+            .then((response) => {
+              const { data } = response.data as RequestSuccess<Response>;
+              AuthService.setAccessToken(data.accessToken);
+              AuthService.setRefreshToken(data.refreshToken);
 
               router.push('/');
             })
@@ -37,15 +35,13 @@ export default function Signin() {
               if (error.response.data?.code === 'N002') {
                 // 회원가입이 안된 유저
                 http
-                  .post<BaseResponse<Response>>('/auth/signup', {
+                  .post('/auth/signup', {
                     data: { socialType: 'KAKAO', token: kakaoAccessToken },
                   })
-                  .then(({ data }) => {
-                    const {
-                      data: { accessToken, refreshToken },
-                    } = data;
-                    AuthService.setAccessToken(accessToken);
-                    AuthService.setRefreshToken(refreshToken);
+                  .then((response) => {
+                    const { data } = response.data as RequestSuccess<Response>;
+                    AuthService.setAccessToken(data.accessToken);
+                    AuthService.setRefreshToken(data.refreshToken);
 
                     router.push('/');
                   })

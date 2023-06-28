@@ -1,8 +1,9 @@
 import { useSuspenseQuery } from '@suspensive/react-query';
 import { useQueryClient } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 
 import { authHttp } from '../core/axios';
-import { BaseResponse } from '../core/types';
+import { RequestError, RequestState } from '../core/types';
 
 type Response = {
   nickname: string;
@@ -27,15 +28,13 @@ export const useGetProfile = () => {
       } = response;
       return data;
     },
-    onError: (error: any) => {
-      queryClient.setQueryData<BaseResponse<Response>>(
-        useGetProfile.queryKey,
-        error.response
-      );
+    onError: (error: AxiosError<RequestError>) => {
+      console.log(error.response);
+      queryClient.setQueryData(useGetProfile.queryKey, error.response);
     },
   });
 };
 
-useGetProfile.queryKey = ['profile'];
+useGetProfile.queryKey = ['profile'] as const;
 useGetProfile.queryFn = () =>
-  authHttp.get<BaseResponse<Response>>('/user/profile');
+  authHttp.get<RequestState<Response>>('/user/profile');

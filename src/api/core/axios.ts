@@ -6,7 +6,7 @@ import type {
 } from 'axios';
 import axios, { isAxiosError } from 'axios';
 
-import { BaseResponse } from './types';
+import { RequestError, RequestState, RequestSuccess } from './types';
 
 const serviceEndpoint = process.env.NEXT_PUBLIC_SERVICE_ENDPOINT;
 const serviceSubfix = process.env.NEXT_PUBLIC_SERVICE_API_SUBFIX;
@@ -42,7 +42,7 @@ authAxiosInstance.interceptors.request.use(
 
 authAxiosInstance.interceptors.response.use(
   (response) => response,
-  async (error: AxiosError<BaseResponse<unknown>>) => {
+  async (error: AxiosError<RequestError>) => {
     if (!isAxiosError(error)) return Promise.reject(error);
 
     const config = error.config as AxiosRequestConfig;
@@ -56,16 +56,19 @@ authAxiosInstance.interceptors.response.use(
     if (config.headers?.retry) return Promise.reject(error);
 
     const token = await AuthService.refresh();
-
-    AuthService.setAccessToken(token);
-    return authAxiosInstance.request({
-      ...config,
-      headers: {
-        ...config.headers,
-        authorization: `Bearer ${token}`,
-        retry: true,
-      },
-    });
+    if (token) {
+      AuthService.setAccessToken(token);
+      return authAxiosInstance.request({
+        ...config,
+        headers: {
+          ...config.headers,
+          authorization: `Bearer ${token}`,
+          retry: true,
+        },
+      });
+    } else {
+      return Promise.reject(error);
+    }
   }
 );
 
@@ -112,13 +115,18 @@ export const AuthService = {
     const accessToken = AuthService.getAccessToken();
     const refreshToken = AuthService.getRefreshToken();
 
-    const {
-      data: { data },
-    } = await authHttp.post<BaseResponse<Response>>(`/auth/reissue`, {
-      data: { accessToken, refreshToken },
-    });
-    AuthService.setAccessToken(data.accessToken);
-    return data.accessToken;
+    try {
+      const {
+        data: { data },
+      } = await authHttp.post<RequestState<Response>>(`/auth/reissue`, {
+        data: { accessToken, refreshToken },
+      });
+      AuthService.setAccessToken(data!.accessToken);
+      return data!.accessToken;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
   },
 };
 
