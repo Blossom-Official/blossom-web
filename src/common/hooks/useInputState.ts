@@ -1,3 +1,5 @@
+'use client';
+
 import { ChangeEventHandler, useCallback, useState } from 'react';
 
 export const useInputState = (initialValue = '') => {
