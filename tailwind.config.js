@@ -46,6 +46,14 @@ module.exports = {
           '1.4rem',
           { lineHeight: '24px', letterSpacing: '0em', fontWeight: '300' },
         ],
+        '24-light-32': [
+          '2.4rem',
+          { lineHeight: '32px', letterSpacing: '0em', fontWeight: '300' },
+        ],
+        '24-regular-32': [
+          '2.4rem',
+          { lineHeight: '32px', letterSpacing: '0em', fontWeight: '400' },
+        ],
         '20-semibold-24': [
           '2.0rem',
           { lineHeight: '24px', letterSpacing: '0em', fontWeight: '600' },
