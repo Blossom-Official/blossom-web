@@ -24,13 +24,11 @@ const EditProfileName = ({ isOpen, onClose }: Props) => {
       />
       <form className='mx-auto mt-200 max-w-[70%]' onSubmit={handleSubmit}>
         <Input
-          className='border-b border-b-white py-12 text-24-semibold-24 text-white'
-          inputClassName='bg-transparent text-center'
+          className=' bg-transparent text-center'
+          rightComponent={<DeleteButton onClick={() => setNickname('')} />}
           type='text'
           value={nickname}
-          rightComponent={
-            <DeleteButton onClick={() => setNickname('')} />
-          }
+          wrapperClassName='border-b border-b-white py-12 text-24-semibold-24 text-white'
           onChange={handleChangeNickname}
         />
       </form>
