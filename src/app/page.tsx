@@ -11,7 +11,7 @@ export default function Home() {
   const overlay = useOverlay();
 
   return (
-    <div className='flex min-h-screen flex-col justify-center bg-green-800 p-20'>
+    <div className='flex min-h-screen flex-col justify-center p-20'>
       {/* 네비게이션 바 제작 */}
       <button
         type='button'
