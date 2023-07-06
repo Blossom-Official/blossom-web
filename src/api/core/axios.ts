@@ -6,7 +6,7 @@ import type {
 } from 'axios';
 import axios, { isAxiosError } from 'axios';
 
-import { RequestError, RequestState, RequestSuccess } from './types';
+import { RequestError, RequestState } from './types';
 
 const serviceEndpoint = process.env.NEXT_PUBLIC_SERVICE_ENDPOINT;
 const serviceSubfix = process.env.NEXT_PUBLIC_SERVICE_API_SUBFIX;
@@ -24,11 +24,6 @@ authAxiosInstance.interceptors.request.use(
     const accessToken = AuthService.getAccessToken();
     const refreshToken = AuthService.getRefreshToken();
 
-    if (config.url === '/auth/reissue' && (!accessToken || !refreshToken)) {
-      AuthService.deleteAccessToken();
-      AuthService.deleteRefreshToken();
-      return Promise.reject('No AccessToken or RefreshToken');
-    }
     if (config.url === '/auth/reissue') {
       return { ...config, data: { accessToken, refreshToken } };
     }
@@ -48,27 +43,41 @@ authAxiosInstance.interceptors.response.use(
     const config = error.config as AxiosRequestConfig;
     const code = error.response?.data.code;
 
-    if (code === 'U001') {
-      AuthService.deleteAccessToken();
-      AuthService.deleteRefreshToken();
+    if (config.url === '/auth/reissue') {
+      /**
+       * NOTE
+       * Refresh 요청에서 RT가 만료되거나 AT, RT를 입력하지 않은 경우
+       */
+      if (code === 'U001' || code === 'V001') {
+        AuthService.deleteAccessToken();
+        AuthService.deleteRefreshToken();
+      }
       return Promise.reject(error);
     }
     if (config.headers?.retry) return Promise.reject(error);
 
-    const token = await AuthService.refresh();
-    if (token) {
-      AuthService.setAccessToken(token);
-      return authAxiosInstance.request({
-        ...config,
-        headers: {
-          ...config.headers,
-          authorization: `Bearer ${token}`,
-          retry: true,
-        },
-      });
-    } else {
-      return Promise.reject(error);
+    /**
+     * NOTE
+     * Refresh 요청을 제외한 요청에 대해 AT가 만료된 경우에만 refresh 요청 호출
+     */
+    if (code === 'U001') {
+      const token = await AuthService.refresh();
+      if (token) {
+        AuthService.setAccessToken(token);
+        return authAxiosInstance.request({
+          ...config,
+          headers: {
+            ...config.headers,
+            authorization: `Bearer ${token}`,
+            retry: true,
+          },
+        });
+      } else {
+        return Promise.reject(error);
+      }
     }
+    // 그 외 에러는 모두 reject
+    return Promise.reject(error);
   }
 );
 
