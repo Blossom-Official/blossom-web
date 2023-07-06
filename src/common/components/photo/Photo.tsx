@@ -1,13 +1,13 @@
-import Image from "next/image";
-import type { ComponentProps } from "react";
+import Image from 'next/image';
+import type { ComponentProps } from 'react';
 
 type Props = ComponentProps<typeof Image>;
 const base64Blur =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAQAAAAnOwc2AAAAEUlEQVR42mO8/Z8BAzAOZUEAQ+ESj6kXXm0AAAAASUVORK5CYII=";
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAQAAAAnOwc2AAAAEUlEQVR42mO8/Z8BAzAOZUEAQ+ESj6kXXm0AAAAASUVORK5CYII=';
 
 const Photo = ({
-  alt = "thumbnail",
-  className = "",
+  alt = 'thumbnail',
+  className = '',
   width,
   height,
   ...rest
@@ -15,15 +15,15 @@ const Photo = ({
   return (
     <div
       className={`relative overflow-hidden [&>img]:!static ${className}`}
-      style={{ width: `${width}px`, height: `${height}px` }}
+      style={{ aspectRatio: `calc(${width} / ${height})` }}
     >
       <Image
         fill
         alt={alt}
         blurDataURL={base64Blur}
-        placeholder="blur"
-        sizes=" "
-        style={{ objectFit: "cover" }}
+        placeholder='blur'
+        sizes=' '
+        style={{ objectFit: 'cover' }}
         {...rest}
       />
     </div>
