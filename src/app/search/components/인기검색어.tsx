@@ -13,7 +13,11 @@ const 인기검색어 = () => {
       <p className='flex flex-wrap gap-12 text-[1.2rem] font-light leading-[2.4rem] text-green-100'>
         {popularFlower.data ? (
           popularFlower.data.map((flower, index) => (
-            <Chip key={index} label={`#${flower}`} />
+            <Chip
+              className='border-yellow text-yellow'
+              key={index}
+              label={`#${flower}`}
+            />
           ))
         ) : (
           <>인기검색어가 없습니다.</>
