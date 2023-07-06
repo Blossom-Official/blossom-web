@@ -42,9 +42,17 @@ module.exports = {
           '2.4rem',
           { lineHeight: '32px', letterSpacing: '0em', fontWeight: '700' },
         ],
+        '10-regular-12': [
+          '1.0rem',
+          { lineHeight: '12px', letterSpacing: '0em', fontWeight: '400' },
+        ],
         '14-light-24': [
           '1.4rem',
           { lineHeight: '24px', letterSpacing: '0em', fontWeight: '300' },
+        ],
+        '14-regular-24': [
+          '1.4rem',
+          { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' },
         ],
         '24-light-32': [
           '2.4rem',

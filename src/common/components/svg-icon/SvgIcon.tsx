@@ -1,4 +1,4 @@
-import { SVGProps } from "react";
+import { SVGProps } from 'react';
 
 interface Props extends SVGProps<SVGSVGElement> {
   /** NOTE: icon id (icons 폴더 아래에 있는 svg 파일명과 동일함) */
@@ -9,11 +9,12 @@ const SvgIcon = ({
   id,
   width = 16,
   height = 16,
-  fill = "none",
+  fill = 'none',
+  stroke,
   ...rest
 }: Props) => {
   return (
-    <svg fill={fill} height={height} width={width} {...rest}>
+    <svg fill={fill} height={height} stroke={stroke} width={width} {...rest}>
       <use href={`/sprite.svg#${id}`} />
     </svg>
   );

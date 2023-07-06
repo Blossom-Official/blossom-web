@@ -51,7 +51,7 @@ const Sidebar = ({ isOpen, onClose }: Props) => {
               <span className='text-16-light-24 text-white'>LIKES</span>
               <Link
                 className='flex items-center gap-2 text-14-light-24 text-green-100'
-                href='/'
+                href='/likes'
                 onClick={() => onClose()}
               >
                 SEE ALL

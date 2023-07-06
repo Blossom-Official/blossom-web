@@ -13,7 +13,8 @@ import { useSearchHistory } from '../hooks';
 
 const SearchForm = () => {
   const searchHandle = useSearchHandle();
-  const flowerSearch = useGetFlowerSearch(searchHandle.value);
+  const deferredValue = useDeferredValue(searchHandle.value);
+  const flowerSearch = useGetFlowerSearch(deferredValue);
   const searchText = useSearchParams().get('q');
 
   return (
@@ -76,7 +77,6 @@ export default SearchForm;
 
 const useSearchHandle = () => {
   const [value, setValue, handleValue] = useInputState('');
-  const deferredValue = useDeferredValue(value);
   const searchHistory = useSearchHistory();
   const router = useRouter();
 
@@ -95,7 +95,7 @@ const useSearchHandle = () => {
   }, [router, setValue]);
 
   return {
-    value: deferredValue,
+    value,
     setValue,
     handleValue,
     handleSubmit,

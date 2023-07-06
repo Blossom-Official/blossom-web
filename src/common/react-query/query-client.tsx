@@ -1,14 +1,14 @@
-'use client'
+'use client';
 
-import type { DehydratedState } from "@tanstack/react-query";
+import type { DehydratedState } from '@tanstack/react-query';
 import {
   Hydrate,
   QueryClient,
   QueryClientProvider as TanStackQueryClientProvider,
-} from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import type { ReactNode } from "react";
-import { useState } from "react";
+} from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import type { ReactNode } from 'react';
+import { useState } from 'react';
 
 interface Props {
   hydrateState?: DehydratedState;
@@ -24,6 +24,7 @@ const QueryClientProvider = ({ hydrateState, children }: Props) => {
             retry: 0,
             useErrorBoundary: true,
             staleTime: 1000 * 5,
+            refetchOnWindowFocus: false,
           },
         },
       })
@@ -32,7 +33,7 @@ const QueryClientProvider = ({ hydrateState, children }: Props) => {
   return (
     <TanStackQueryClientProvider client={queryClient}>
       <Hydrate state={hydrateState}>{children}</Hydrate>
-      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+      <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />
     </TanStackQueryClientProvider>
   );
 };
