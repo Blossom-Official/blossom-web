@@ -24,13 +24,15 @@ export default function Signin() {
         <span className='h-px w-full flex-1 bg-white'></span>
       </section>
 
-      <button type='button' onClick={handleButtonClick}>
+      <button
+        className='mx-auto h-45 w-300'
+        type='button'
+        onClick={handleButtonClick}
+      >
         <Photo
           alt='카카오 로그인 버튼'
           className='m-auto'
-          height='45'
           src='/images/kakao-login.png'
-          width='300'
         />
       </button>
     </>
