@@ -3,7 +3,6 @@ import { useSuspenseQuery } from '@suspensive/react-query';
 import { http } from '../core/axios';
 import { RequestSuccess } from '../core/types';
 
-const imageUrl = 'https://source.unsplash.com/random/300×300';
 export type Empty = 'empty';
 export type Exist = 'exist';
 
@@ -22,38 +21,6 @@ export const useGetFlowerSearch = (keyword: string) => {
         return { type: 'empty' as Empty, ...data };
       }
       return { type: 'exist' as Exist, ...data };
-      // return {
-      //   type: 'exist',
-      //   flowerTags: ['프로포즈', '봄'],
-      //   flowers: [
-      //     {
-      //       flowerId: 1,
-      //       koreanName: '은방울꽃',
-      //       englishName: 'LILY OF THE VALLEY',
-      //       imageUrl,
-      //     },
-      //     {
-      //       flowerId: 2,
-      //       koreanName: '은방울꽃',
-      //       englishName: 'LILY OF THE VALLEY',
-      //       imageUrl,
-      //     },
-      //   ],
-      //   contentSummaryInfos: [
-      //     {
-      //       contentId: 1,
-      //       imageUrl,
-      //       title: 'MONODSFOE',
-      //       subtitle: '은방울은방울은방울',
-      //     },
-      //     {
-      //       contentId: 2,
-      //       imageUrl,
-      //       title: 'MONODSFOE',
-      //       subtitle: '은방울은방울은방울',
-      //     },
-      //   ],
-      // };
     },
   });
 };
