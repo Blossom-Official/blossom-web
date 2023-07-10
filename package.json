@@ -10,6 +10,7 @@
     "make-sprite": "rm public/sprite.svg && svgstore -o public/sprite.svg public/icons/**/*.svg"
   },
   "dependencies": {
+    "@mui/base": "^5.0.0-beta.6",
     "@suspensive/react": "^1.11.1",
     "@suspensive/react-query": "^1.11.1",
     "@tanstack/react-query": "^4.29.5",
