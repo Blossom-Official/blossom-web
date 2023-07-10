@@ -5,23 +5,20 @@ import { useCallback } from 'react';
 import { useLocalStorage } from '@/common/hooks';
 
 const LIMIT = 10;
-export const HISTORY_KEY = 'blossom-flower-search-history';
+const HISTORY_KEY = 'blossom-flower-search-history';
 
 export const useSearchHistory = () => {
-  const [history, setHistory] = useLocalStorage<string[]>(
-    'blossom-flower-search-history',
-    []
-  );
+  const [history, setHistory] = useLocalStorage<string[]>(HISTORY_KEY, []);
   const add = useCallback(
     (keyword: string) => {
       if (!keyword || !keyword.trim()) return;
 
       setHistory((prevHistory) => {
-        const prevHistorySet = new Set(prevHistory);
-        if (prevHistorySet.has(keyword)) {
-          prevHistorySet.delete(keyword);
-          prevHistorySet.add(keyword);
-          return Array.from(prevHistorySet.values());
+        const clone = new Set(prevHistory);
+        if (clone.has(keyword)) {
+          clone.delete(keyword);
+          clone.add(keyword);
+          return Array.from(clone.values());
         }
 
         if (prevHistory.length < LIMIT) return prevHistory.concat(keyword);
@@ -31,5 +28,16 @@ export const useSearchHistory = () => {
     [setHistory]
   );
 
-  return { history, add } as const;
+  const remove = useCallback(
+    (keyword: string) => {
+      setHistory((prevHistory) => {
+        const clone = new Set(prevHistory);
+        clone.delete(keyword);
+        return Array.from(clone.values());
+      });
+    },
+    [setHistory]
+  );
+
+  return { history, add, remove } as const;
 };

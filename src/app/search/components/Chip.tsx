@@ -1,19 +1,21 @@
 import clsx from 'clsx';
-import { ComponentProps } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 
 interface ChipProps extends ComponentProps<'button'> {
   label: string;
+  leftComponent?: ReactNode;
 }
-const Chip = ({ label, className, ...rest }: ChipProps) => {
+const Chip = ({ label, className, leftComponent, ...rest }: ChipProps) => {
   return (
     <button
       {...rest}
       className={clsx(
-        'rounded-full border border-yellow px-12 py-2 text-[1.2rem] font-light leading-[2.4rem] text-yellow',
+        'flex items-center gap-8 rounded-full border px-12 py-2 text-[1.2rem] font-light leading-[2.4rem]',
         className
       )}
     >
       {label}
+      {leftComponent}
     </button>
   );
 };

@@ -1,7 +1,7 @@
-/** @type {import('tailwindcss').Config} */
 const PX0_300 = { ...Array.from(Array(301)).map((_, i) => `${i / 10}rem`) };
 const PX0_50 = { ...Array.from(Array(51)).map((_, i) => `${i / 10}rem`) };
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -26,10 +26,15 @@ module.exports = {
           400: '#333A29',
         },
         yellow: '#FFCE00',
-        pink: '#FFCBF1',
+        pink: { 100: '#FFCBF1', 200: '#976489' },
         blue: '#7A7EA4',
       },
+      lineHeight: PX0_50,
       fontSize: {
+        ...PX0_50,
+        /**
+         * @deprecated
+         */
         '24-bold-24': [
           '2.4rem',
           { lineHeight: '24px', letterSpacing: '0em', fontWeight: '700' },

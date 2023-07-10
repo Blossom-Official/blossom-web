@@ -10,7 +10,7 @@ const Header = () => {
   const searchParams = useSearchParams();
   const searchText = searchParams.get('q');
   return (
-    <header className={clsx('p-16', [!!searchText && 'bg-green-200'])}>
+    <header className={clsx('flex p-16', [!!searchText && 'bg-green-200'])}>
       <Link href='/search'>
         <SvgIcon height='24' id='left-arrow' width='24' />
       </Link>
