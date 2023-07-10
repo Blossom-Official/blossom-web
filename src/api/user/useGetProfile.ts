@@ -29,7 +29,6 @@ export const useGetProfile = () => {
       return data;
     },
     onError: (error: AxiosError<RequestError>) => {
-      console.log(error.response);
       queryClient.setQueryData(useGetProfile.queryKey, error.response);
     },
   });
