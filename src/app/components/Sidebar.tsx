@@ -20,7 +20,7 @@ const Sidebar = ({ isOpen, onClose }: Props) => {
   const { data } = useGetProfile();
   return (
     <Menu
-      className='bg-[#3E482F]/80 backdrop-blur-sm'
+      className='bg-[#2A2E24]/80 backdrop-blur-sm'
       isOpen={isOpen}
       onClose={onClose}
     >
@@ -57,10 +57,11 @@ const Sidebar = ({ isOpen, onClose }: Props) => {
                 SEE ALL
                 <SvgIcon
                   aria-labelledby='좋아하기 모아둔 꽃 보러가기'
-                  height='24'
+                  className='[&_*]:fill-green-100'
+                  height='18'
                   id='right-arrow'
                   role='img'
-                  width='24'
+                  width='18'
                 />
               </Link>
             </div>

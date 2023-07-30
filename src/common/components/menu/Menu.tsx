@@ -13,7 +13,7 @@ const Menu = ({ children, isOpen, onClose, className, ...rest }: MenuProps) => {
   return (
     <MenuProvider isOpen={isOpen} onClose={onClose}>
       {isOpen && (
-        <nav className={`absolute inset-0 ${className}`} {...rest}>
+        <nav className={`fixed inset-0 z-[1200] ${className}`} {...rest}>
           {children}
         </nav>
       )}
