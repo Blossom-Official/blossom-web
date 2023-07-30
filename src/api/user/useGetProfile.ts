@@ -22,6 +22,7 @@ export const useGetProfile = () => {
   return useSuspenseQuery({
     queryKey: useGetProfile.queryKey,
     queryFn: useGetProfile.queryFn,
+    staleTime: Infinity,
     select: (response) => {
       const {
         data: { data },
