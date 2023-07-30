@@ -80,6 +80,10 @@ module.exports = {
         'lemon-milk': ['var(--font-lemon-milk)'],
         pretendard: ['var(--font-pretendardVariable)'],
       },
+      backgroundImage: {
+        'content-overlay':
+          'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.50) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%)',
+      },
     },
   },
   plugins: [],

@@ -14,16 +14,25 @@ const lemonMilk = localFont({
     {
       path: '../../public/fonts/LEMONMILK-Bold.otf',
       weight: '700',
-      style: 'bold',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/LEMONMILK-Medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/LEMONMILK-Regular.otf',
+      weight: '400',
+      style: 'normal',
     },
     {
       path: '../../public/fonts/LEMONMILK-Light.otf',
       weight: '300',
-      style: 'light',
+      style: 'normal',
     },
   ],
   display: 'swap',
-  declarations: [{ prop: 'unicode-range', value: 'U+0041-005A, U+0061-007A' }],
   variable: '--font-lemon-milk',
 });
 
@@ -31,6 +40,7 @@ export const pretendard = localFont({
   src: '../../public/fonts/PretendardVariable.woff2',
   weight: '100 900',
   display: 'swap',
+  declarations: [{ prop: 'unicode-range', value: 'U+0041-005A, U+0061-007A' }],
   variable: '--font-pretendardVariable',
 });
 
@@ -49,7 +59,7 @@ export default function RootLayout({
       <link as='image' href='/sprite.svg' rel='preload' type='image/svg+xml' />
       <body className={`${lemonMilk.variable} ${pretendard.variable}`}>
         <QueryClientProvider>
-          <main className='relative mx-auto h-fit min-h-full max-w-[44rem] bg-green-400 font-pretendard shadow-lg'>
+          <main className='relative mx-auto h-full min-h-full max-w-[44rem] bg-green-400 font-pretendard shadow-lg'>
             <OverlayProvider>{children}</OverlayProvider>
           </main>
         </QueryClientProvider>

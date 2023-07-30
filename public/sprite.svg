@@ -3,10 +3,8 @@
 <path d="M9 1L1 9"/>
 </symbol><symbol id="done" viewBox="0 0 24 24">
 <path d="M3 12.129L8.6 18L21 5" stroke="white"/>
-</symbol><symbol id="left-arrow" viewBox="0 0 24 24">
-<g id="ic_go">
-<path id="icon" d="M21 11H4V13H21V11ZM12.4211 19L5.42105 12L12.4211 5L11 3.57895L2.57895 12L11 20.4211L12.4211 19Z" fill="#8E9A78"/>
-</g>
+</symbol><symbol id="left-arrow" viewBox="0 0 19 18">
+<path d="M19 8.00003H2V10H19V8.00003ZM10.4211 16L3.42105 9.00003L10.4211 2.00003L9 0.578979L0.578947 9.00003L9 17.4211L10.4211 16Z" fill="#8E9A78"/>
 </symbol><symbol id="login" viewBox="0 0 24 24">
 <path d="M10.5 17L15.5 17L15.5 7L10.5 7" stroke="white"/>
 <path d="M5 12L11 12" stroke="white"/>
@@ -22,6 +20,9 @@
 <path d="M48 0L72 6.43078L89.5692 24L96 48L89.5692 72L72 89.5692L48 96L24 89.5692L6.43078 72L0 48L6.43078 24L24 6.43078L48 0Z" fill="#333A29"/>
 </symbol><symbol id="right-arrow" viewBox="0 0 24 24">
 <path d="M7 11.4063H16.2286V12.5938H7V11.4063ZM11.6571 16.1563L15.4571 12L11.6571 7.84375L12.4286 7L17 12L12.4286 17L11.6571 16.1563Z" fill="#8E9A78"/>
+</symbol><symbol id="search-green-100" viewBox="0 0 24 24">
+<path d="M17 17L22 22" stroke="#8E9A78" stroke-width="1.5"/>
+<path d="M11.5 3L17.5104 5.48959L20 11.5L17.5104 17.5104L11.5 20L5.48959 17.5104L3 11.5L5.48959 5.48959L11.5 3Z" stroke="#8E9A78" stroke-width="1.5"/>
 </symbol><symbol id="search" viewBox="0 0 24 24">
 <path d="M17 17L22 22" stroke="white" stroke-width="1.5"/>
 <path d="M11.5 3L17.5104 5.48959L20 11.5L17.5104 17.5104L11.5 20L5.48959 17.5104L3 11.5L5.48959 5.48959L11.5 3Z" stroke="white" stroke-width="1.5"/>
