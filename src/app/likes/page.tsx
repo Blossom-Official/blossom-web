@@ -81,7 +81,11 @@ export default function LikesPage() {
             select.isEmpty ? 'bg-[#3E482F]/80' : 'bg-pink-100'
           )}
           onClick={() => {
-            deleteFlowerLikes.mutate();
+            if (
+              confirm('정말 삭제할까요?\n한 번 삭제하면 복구가 되지 않아요!')
+            ) {
+              deleteFlowerLikes.mutate();
+            }
           }}
         >
           {select.isEmpty ? (
