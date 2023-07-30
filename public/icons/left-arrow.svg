@@ -1,5 +1,3 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="ic_go">
-<path id="icon" d="M21 11H4V13H21V11ZM12.4211 19L5.42105 12L12.4211 5L11 3.57895L2.57895 12L11 20.4211L12.4211 19Z" fill="#8E9A78"/>
-</g>
+<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 8.00003H2V10H19V8.00003ZM10.4211 16L3.42105 9.00003L10.4211 2.00003L9 0.578979L0.578947 9.00003L9 17.4211L10.4211 16Z" fill="#8E9A78"/>
 </svg>

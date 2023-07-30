@@ -5,17 +5,13 @@ type Props = ComponentProps<typeof Image>;
 const base64Blur =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAQAAAAnOwc2AAAAEUlEQVR42mO8/Z8BAzAOZUEAQ+ESj6kXXm0AAAAASUVORK5CYII=';
 
-const Photo = ({
-  alt = 'thumbnail',
-  className = '',
-  width,
-  height,
-  ...rest
-}: Props) => {
+const Photo = ({ alt, className = '', width, height, ...rest }: Props) => {
   return (
     <div
       className={`relative overflow-hidden [&>img]:!static ${className}`}
-      style={{ aspectRatio: `calc(${width} / ${height})` }}
+      style={
+        width && height ? { aspectRatio: `calc(${width} / ${height})` } : {}
+      }
     >
       <Image
         fill
