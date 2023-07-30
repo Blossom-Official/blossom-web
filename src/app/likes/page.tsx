@@ -1,6 +1,7 @@
 'use client';
 
 import { QueryAsyncBoundary } from '@suspensive/react-query';
+import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -19,7 +20,7 @@ export default function LikesPage() {
 
   return (
     <>
-      <header className='flex justify-between bg-green-200 p-16'>
+      <header className='flex justify-between bg-[#3E482F]/80 p-16'>
         <div className='flex gap-12'>
           {editMode ? (
             <div className='text-16-light-24 text-white'>
@@ -38,37 +39,23 @@ export default function LikesPage() {
         </div>
 
         <div className='flex gap-12'>
-          {editMode && (
-            <button
-              disabled={select.isEmpty}
-              onClick={() => {
-                deleteFlowerLikes.mutate();
-              }}
-            >
-              {select.isEmpty ? (
-                <SvgIcon
-                  height='24'
-                  id='trash-can'
-                  stroke='#bcbcbc'
-                  width='24'
-                />
-              ) : (
-                <SvgIcon
-                  height='24'
-                  id='trash-can'
-                  stroke='#ffcbf1'
-                  width='24'
-                />
-              )}
-            </button>
-          )}
           <button
             onClick={() => {
               select.clearItems();
               handleEditMode();
             }}
           >
-            <SvgIcon height='24' id='pencil' width='24' />
+            {editMode ? (
+              <SvgIcon
+                aria-labelledby='편집 모드 닫기'
+                height='24'
+                id='menu-out'
+                role='img'
+                width='24'
+              />
+            ) : (
+              <SvgIcon height='24' id='pencil' width='24' />
+            )}
           </button>
         </div>
       </header>
@@ -85,6 +72,35 @@ export default function LikesPage() {
           onSelect={select.selectItem}
         />
       </QueryAsyncBoundary>
+
+      {editMode && (
+        <button
+          disabled={select.isEmpty}
+          className={clsx(
+            'fixed inset-x-0 bottom-0 h-80',
+            select.isEmpty ? 'bg-[#3E482F]/80' : 'bg-pink-100'
+          )}
+          onClick={() => {
+            deleteFlowerLikes.mutate();
+          }}
+        >
+          {select.isEmpty ? (
+            <SvgIcon
+              className='m-auto [&_*]:stroke-green-100'
+              height='24'
+              id='trash-can'
+              width='24'
+            />
+          ) : (
+            <SvgIcon
+              className='m-auto [&_*]:stroke-pink-200'
+              height='24'
+              id='trash-can'
+              width='24'
+            />
+          )}
+        </button>
+      )}
     </>
   );
 }
