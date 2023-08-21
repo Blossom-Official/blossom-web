@@ -15,7 +15,7 @@ export default function Home() {
     <div className='flex min-h-screen flex-col justify-center bg-green-400 text-white'>
       <Header />
 
-      <section className='h-screen'>
+      <section className='-mt-56 h-screen'>
         <Photo
           alt='배경화면'
           className='h-full'
@@ -46,17 +46,26 @@ export default function Home() {
       </section>
 
       <Suspense>
-        <MainComp />
+        <section className='h-full min-h-screen'>
+          <MainComp />
+        </section>
       </Suspense>
     </div>
   );
 }
 
+const CATEGORIES = [
+  { name: '축하', query: 'CELEBRATE' },
+  { name: '감사', query: 'THANKS' },
+  { name: '사랑', query: 'LOVE' },
+  { name: '위로', query: 'CHEERING' },
+] as const;
+
 const MainComp = () => {
   const homeData = useGetHome();
 
   return (
-    <section className='box-border min-h-screen pt-56'>
+    <>
       <section className='mb-20'>
         <ContentsSlider contents={homeData.data.contents} />
       </section>
@@ -65,7 +74,25 @@ const MainComp = () => {
         <h3 className='mb-16 border-b font-lemon-milk text-16 leading-24'>
           CATEGORY
         </h3>
-        <ul>{/* CATEGORY */}</ul>
+        <ul className='flex w-full gap-8'>
+          {CATEGORIES.map((category) => {
+            return (
+              <li
+                className='relative w-1/4 after:block after:pb-[100%] after:content-[""]'
+                key={category.query}
+              >
+                <Link
+                  className='absolute h-full w-full'
+                  href={`/category?category=${category.query}`}
+                >
+                  <span className='absolute bottom-10 left-8 text-14 font-semibold leading-24'>
+                    {category.name}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
         <Link
           className='mt-28 flex w-full justify-between border border-solid border-pink-200 bg-pink-100 px-20 py-12 text-16 font-medium leading-24 text-pink-200'
           href='/recomand'
@@ -88,6 +115,6 @@ const MainComp = () => {
         </h3>
         <PopularFlowers flowers={homeData.data.flowers} />
       </section>
-    </section>
+    </>
   );
 };
