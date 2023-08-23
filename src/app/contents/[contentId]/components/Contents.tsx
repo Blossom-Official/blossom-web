@@ -18,9 +18,9 @@ const Contents = ({ contentId }: Props) => {
     },
   });
   return (
-    <ul className='keen-slider relative flex grow text-white' ref={sliderRef}>
-      <li className='keen-slider__slide relative'>
-        <Photo alt='main' className='h-full' src={content.contentImageUrl} />
+    <ul className='keen-slider text-white' ref={sliderRef}>
+      <li className='keen-slider__slide'>
+        <Photo alt='main' className='h-screen' src={content.contentImageUrl} />
         <div className='fixed inset-0 bg-content-overlay'></div>
         <section className='absolute bottom-85 px-20'>
           <div className='text-16 font-normal leading-24 text-green-100'>
@@ -38,10 +38,10 @@ const Contents = ({ contentId }: Props) => {
       </li>
       {content.contentDetailInfos.map((contentDetail, index) => {
         return (
-          <li className='keen-slider__slide relative' key={index}>
+          <li className='keen-slider__slide' key={index}>
             <Photo
               alt='main'
-              className='h-full'
+              className='h-screen'
               src={contentDetail.contentImageUrl}
             />
             <div className='fixed inset-0 bg-content-overlay'></div>
@@ -81,14 +81,11 @@ const Contents = ({ contentId }: Props) => {
           </li>
         );
       })}
-      <li
-        className='keen-slider__slide relative'
-        style={{ overflowY: 'auto', height: '100%' }}
-      >
-        <Photo alt='main' className='h-full' src={content.contentImageUrl} />
-        <div className='absolute inset-0 h-full bg-content-overlay'></div>
-        <div className='absolute top-85'>
-          <section className='px-20 font-medium text-grey'>
+      <li className='keen-slider__slide'>
+        <Photo alt='main' className='h-screen' src={content.contentImageUrl} />
+        <div className='fixed inset-0 bg-content-overlay'></div>
+        <div className='absolute inset-0 overflow-y-auto pb-20'>
+          <section className='mt-85 px-20 font-medium text-grey'>
             <h2 className='text-16 leading-24'>{content.subtitle}</h2>
             <h1 className='font-lemon-milk text-20 leading-24'>
               {content.title}

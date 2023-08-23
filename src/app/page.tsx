@@ -15,7 +15,7 @@ export default function Home() {
     <div className='flex min-h-screen flex-col justify-center bg-green-400 text-white'>
       <Header />
 
-      <section className='-mt-56 h-screen'>
+      <section className='relative -mt-56 h-screen'>
         <Photo
           alt='배경화면'
           className='h-full'
