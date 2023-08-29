@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs/><symbol id="delete" viewBox="0 0 10 10">
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs/><symbol id="bottom-arrow" viewBox="0 0 45 14">
+<path d="M1.5 2L22.5 12L43.5 2" stroke="#7B8863" stroke-width="3"/>
+</symbol><symbol id="delete" viewBox="0 0 10 10">
 <path d="M1 1L9 9"/>
 <path d="M9 1L1 9"/>
 </symbol><symbol id="done" viewBox="0 0 24 24">
@@ -28,6 +30,10 @@
 <path d="M17.6673 8.33274L19.7886 6.21142L17.6673 4.0901L15.5459 6.21142M17.6673 8.33274L8.12132 17.8787L4.93934 18.9393L6 15.7574L15.5459 6.21142M17.6673 8.33274L15.5459 6.21142" stroke="#BCBCBC"/>
 </symbol><symbol id="polygon" viewBox="0 0 96 96">
 <path d="M48 0L72 6.43078L89.5692 24L96 48L89.5692 72L72 89.5692L48 96L24 89.5692L6.43078 72L0 48L6.43078 24L24 6.43078L48 0Z" fill="#333A29"/>
+</symbol><symbol id="question-mark" viewBox="0 0 36 68">
+<path d="M10.7891 46.0781L20.125 46.0391C20.0859 45.4531 20.0859 44.9453 20.0859 44.4375C20.2422 37.2109 25.5938 35.6094 30.125 31.3516C33.5625 27.9922 35.3203 23.7734 35.3203 18.0703C35.3203 9.78906 27.3906 0.960938 16.1016 0.960938C6.375 0.960938 1.60938 6.74219 0.046875 9.67188L3.60156 17.4844C5.35938 13.3047 10.3984 10.5312 15.5938 10.5312C21.8438 10.5312 26.2578 14.2031 26.2578 19.8672C26.2578 22.8359 24.6172 25.6875 22.7422 27.1328C15.5938 32.6797 10.7891 37.6016 10.7891 44.9453V46.0781ZM15.5938 67.7969C19.1875 67.7969 22.1953 64.9453 22.1953 61.3125C22.1953 57.7188 19.1875 54.7109 15.5156 54.7109C11.9219 54.7109 8.95312 57.5625 8.95312 61.1953C8.95312 64.7891 11.8828 67.7969 15.5938 67.7969Z" fill="white"/>
+</symbol><symbol id="right-arrow-2" viewBox="0 0 24 24">
+<path d="M4 12H20M20 12L13.697 6M20 12L13.697 18" stroke="#BCBCBC"/>
 </symbol><symbol id="right-arrow" viewBox="0 0 24 24">
 <path d="M3 11H20V13H3V11ZM11.5789 19L18.5789 12L11.5789 4.99997L13 3.57892L21.4211 12L13 20.421L11.5789 19Z"/>
 </symbol><symbol id="search-green-100" viewBox="0 0 24 24">
