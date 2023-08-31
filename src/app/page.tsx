@@ -61,11 +61,20 @@ export default function Home() {
   );
 }
 
-const CATEGORIES = [
-  { name: '축하', query: 'CELEBRATE', imageUrl: '/images/celebrate.png' },
-  { name: '감사', query: 'THANKS', imageUrl: '/images/thanks.png' },
-  { name: '사랑', query: 'LOVE', imageUrl: '/images/love.png' },
-  { name: '위로', query: 'CHEERING', imageUrl: '/images/cheering.png' },
+
+const CATEGORIES= [
+  { name: '사랑', query: 'LOVE', imageUrl: '/images/category/love.png' },
+  {
+    name: '축하',
+    query: 'CELEBRATE',
+    imageUrl: '/images/category/celebrate.png',
+  },
+  { name: '감사', query: 'THANKS', imageUrl: '/images/category/thanks.png' },
+  {
+    name: '위로',
+    query: 'CHEERING',
+    imageUrl: '/images/category/cheering.png',
+  },
 ] as const;
 
 const MainComp = () => {
@@ -93,9 +102,6 @@ const MainComp = () => {
                   href={`/category?category=${category.query}`}
                 >
                   <Photo alt={category.name} src={category.imageUrl} />
-                  <span className='absolute bottom-4 left-6 text-14 font-semibold'>
-                    {category.name}
-                  </span>
                 </Link>
               </li>
             );
