@@ -16,10 +16,7 @@ const PopularFlowers = ({ flowers }: PopularFlowersProps) => {
             <Fragment key={flower.flowerId}>
               {index === 0 && (
                 <li className='relative col-span-2'>
-                  <Link
-                    className='relative'
-                    href={`/flowers/${flower.flowerId}`}
-                  >
+                  <Link href={`/flowers/${flower.flowerId}`}>
                     <Photo
                       alt={flower.koreanName}
                       height={108}
@@ -40,10 +37,7 @@ const PopularFlowers = ({ flowers }: PopularFlowersProps) => {
               )}
               {index !== 0 && (
                 <li className='relative'>
-                  <Link
-                    className='relative'
-                    href={`/flowers/${flower.flowerId}`}
-                  >
+                  <Link href={`/flowers/${flower.flowerId}`}>
                     <Photo
                       alt={flower.koreanName}
                       height={44}
