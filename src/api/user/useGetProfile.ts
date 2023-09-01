@@ -5,6 +5,22 @@ import { AxiosError } from 'axios';
 import { authHttp } from '../core/axios';
 import { RequestError, RequestState } from '../core/types';
 
+export const useGetProfile = () => {
+  const queryClient = useQueryClient();
+  return useSuspenseQuery({
+    queryKey: useGetProfile.queryKey,
+    queryFn: useGetProfile.queryFn,
+    staleTime: Infinity,
+    select: (response) => {
+      const { data } = response.data;
+      return data;
+    },
+    onError: (error: AxiosError<RequestError>) => {
+      queryClient.setQueryData(useGetProfile.queryKey, error.response);
+    },
+  });
+};
+
 type Response = {
   nickname: string;
   isDefaultProfileImage: boolean;
@@ -16,24 +32,6 @@ type Response = {
     imageUrl: string;
   }[];
 } | null;
-
-export const useGetProfile = () => {
-  const queryClient = useQueryClient();
-  return useSuspenseQuery({
-    queryKey: useGetProfile.queryKey,
-    queryFn: useGetProfile.queryFn,
-    staleTime: Infinity,
-    select: (response) => {
-      const {
-        data: { data },
-      } = response;
-      return data;
-    },
-    onError: (error: AxiosError<RequestError>) => {
-      queryClient.setQueryData(useGetProfile.queryKey, error.response);
-    },
-  });
-};
 
 useGetProfile.queryKey = ['profile'] as const;
 useGetProfile.queryFn = () =>
