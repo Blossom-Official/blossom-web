@@ -3,24 +3,38 @@ import 'keen-slider/keen-slider.min.css';
 
 import { Suspense } from '@suspensive/react';
 import Link from 'next/link';
+import { useRef } from 'react';
 
 import { useGetHome } from '@/api/home';
 import { Photo } from '@/common/components/photo';
 import { SvgIcon } from '@/common/components/svg-icon';
 
-import { ContentsSlider, Header, PopularFlowers } from './components';
+import {
+  ContentsSlider,
+  PopularFlowers,
+  ProfileMenuButton,
+} from './components';
 
 export default function Home() {
-  return (
-    <div className='flex min-h-screen flex-col justify-center bg-green-400 text-white'>
-      <Header />
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
-      <section className='relative -mt-56 h-screen'>
+  const handleScroll = () => {
+    headingRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <>
+      <section className='relative h-screen'>
+        <header className='sticky top-0 z-[1000] flex w-full justify-between bg-transparent p-16'>
+          <ProfileMenuButton />
+        </header>
+
         <Photo
           alt='배경화면'
-          className='h-full'
+          className='-mt-56 h-full'
           src='/images/background-image.png'
         />
+
         <div className='absolute inset-0 flex flex-col justify-center px-20'>
           <div>
             <p className='text-center text-20 font-medium leading-24 text-[#c2cdad]'>
@@ -45,6 +59,7 @@ export default function Home() {
           <button
             className='absolute bottom-20 left-1/2 flex -translate-x-1/2 flex-col items-center justify-center gap-8 text-12 leading-20 text-green-100'
             type='button'
+            onClick={handleScroll}
           >
             더보기
             <SvgIcon height='10' id='bottom-arrow' width='42' />
@@ -52,17 +67,30 @@ export default function Home() {
         </div>
       </section>
 
-      <Suspense>
-        <section className='h-full min-h-screen'>
+      <section className='h-full min-h-screen text-white'>
+        <header
+          className='sticky top-0 z-[1000] flex w-full justify-between bg-[#3E482F]/80 p-16'
+          ref={headingRef}
+        >
+          <div className='flex gap-10 font-lemon-milk text-16 leading-24 text-green-100'>
+            <ProfileMenuButton />
+          </div>
+          <div>
+            <Link href='/search'>
+              <SvgIcon height='24' id='search' width='24' />
+            </Link>
+          </div>
+        </header>
+
+        <Suspense>
           <MainComp />
-        </section>
-      </Suspense>
-    </div>
+        </Suspense>
+      </section>
+    </>
   );
 }
 
-
-const CATEGORIES= [
+const CATEGORIES = [
   { name: '사랑', query: 'LOVE', imageUrl: '/images/category/love.png' },
   {
     name: '축하',
