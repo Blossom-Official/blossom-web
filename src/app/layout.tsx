@@ -40,7 +40,6 @@ export const pretendard = localFont({
   src: '../../public/fonts/PretendardVariable.woff2',
   weight: '100 900',
   display: 'swap',
-  declarations: [{ prop: 'unicode-range', value: 'U+0041-005A, U+0061-007A' }],
   variable: '--font-pretendardVariable',
 });
 

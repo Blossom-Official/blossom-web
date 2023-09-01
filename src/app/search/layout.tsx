@@ -19,7 +19,7 @@ export default function SearchLayout({
 
   return (
     <>
-      <section className='flex h-full min-h-screen flex-col'>
+      <section className='flex h-full min-h-[100dvh] flex-col'>
         <Header />
         {children}
         {isResultPage ? result : main}

@@ -163,7 +163,7 @@ const Finish = ({ options }: FinishProps) => {
 
   return (
     <>
-      <div className='relative h-screen overflow-hidden'>
+      <div className='relative h-[100dvh] overflow-hidden'>
         <div className='absolute top-0 h-full w-full'>
           <Photo alt='배경화면' src='/images/background-image.png' />
         </div>

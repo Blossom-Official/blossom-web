@@ -6,6 +6,7 @@ import { memo } from 'react';
 import { useLogout } from '@/api/auth';
 import { useGetProfile } from '@/api/user';
 import { Menu } from '@/common/components/menu';
+import { Photo } from '@/common/components/photo';
 import { SvgIcon } from '@/common/components/svg-icon';
 import { useOverlay } from '@/common/hooks';
 
@@ -68,11 +69,36 @@ const Sidebar = ({ isOpen, onClose }: Props) => {
           )}
         </Menu.Item>
         {data && (
-          <Menu.Item className='flex flex-col gap-10 border-b border-b-white py-16 font-lemon-milk text-16-light-24 text-white'>
+          <Menu.Item className='flex flex-col gap-10 overflow-x-auto border-b border-b-white py-16 font-lemon-milk text-16-light-24 text-white'>
             {data.flowers.length === 0 ? (
               <p>모아둔 꽃이 없습니다.</p>
             ) : (
-              <>{/* TODO: 꽃 일러스트 추가 */}</>
+              <ul className='flex w-fit gap-12'>
+                {data.flowers.map((flower) => {
+                  return (
+                    <li className='h-98 w-98' key={flower.flowerId}>
+                      <Link
+                        className='relative'
+                        href={`/flowers/${flower.flowerId}`}
+                      >
+                        <Photo
+                          alt={flower.koreanName}
+                          className='h-full w-full'
+                          src={flower.imageUrl}
+                        />
+                        <div className='absolute bottom-0 flex flex-col p-8'>
+                          <span className='text-14 font-semibold leading-24'>
+                            {flower.koreanName}
+                          </span>
+                          <span className='font-lemon-milk text-10 font-light leading-12'>
+                            {flower.englishName}
+                          </span>
+                        </div>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
             )}
           </Menu.Item>
         )}
