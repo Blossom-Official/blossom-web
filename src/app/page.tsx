@@ -22,7 +22,7 @@ export default function Home() {
           src='/images/background-image.png'
         />
         <div className='absolute inset-0 flex flex-col justify-center px-20'>
-          <div className=''>
+          <div>
             <p className='text-center text-20 font-medium leading-24 text-[#c2cdad]'>
               마음을 피워요
             </p>
@@ -42,6 +42,13 @@ export default function Home() {
               />
             </Link>
           </div>
+          <button
+            className='absolute bottom-20 left-1/2 flex -translate-x-1/2 flex-col items-center justify-center gap-8 text-12 leading-20 text-green-100'
+            type='button'
+          >
+            더보기
+            <SvgIcon height='10' id='bottom-arrow' width='42' />
+          </button>
         </div>
       </section>
 
@@ -54,11 +61,20 @@ export default function Home() {
   );
 }
 
-const CATEGORIES = [
-  { name: '축하', query: 'CELEBRATE' },
-  { name: '감사', query: 'THANKS' },
-  { name: '사랑', query: 'LOVE' },
-  { name: '위로', query: 'CHEERING' },
+
+const CATEGORIES= [
+  { name: '사랑', query: 'LOVE', imageUrl: '/images/category/love.png' },
+  {
+    name: '축하',
+    query: 'CELEBRATE',
+    imageUrl: '/images/category/celebrate.png',
+  },
+  { name: '감사', query: 'THANKS', imageUrl: '/images/category/thanks.png' },
+  {
+    name: '위로',
+    query: 'CHEERING',
+    imageUrl: '/images/category/cheering.png',
+  },
 ] as const;
 
 const MainComp = () => {
@@ -85,9 +101,7 @@ const MainComp = () => {
                   className='absolute h-full w-full'
                   href={`/category?category=${category.query}`}
                 >
-                  <span className='absolute bottom-10 left-8 text-14 font-semibold leading-24'>
-                    {category.name}
-                  </span>
+                  <Photo alt={category.name} src={category.imageUrl} />
                 </Link>
               </li>
             );
@@ -95,7 +109,7 @@ const MainComp = () => {
         </ul>
         <Link
           className='mt-28 flex w-full justify-between border border-solid border-pink-200 bg-pink-100 px-20 py-12 text-16 font-medium leading-24 text-pink-200'
-          href='/recomand'
+          href='/quiz'
         >
           꽃 추천 받기
           <SvgIcon
