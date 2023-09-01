@@ -20,7 +20,11 @@ const Contents = ({ contentId }: Props) => {
   return (
     <ul className='keen-slider text-white' ref={sliderRef}>
       <li className='keen-slider__slide'>
-        <Photo alt='main' className='h-screen' src={content.contentImageUrl} />
+        <Photo
+          alt='main'
+          className='h-[100dvh]'
+          src={content.contentImageUrl}
+        />
         <div className='fixed inset-0 bg-content-overlay'></div>
         <section className='absolute bottom-85 px-20'>
           <div className='text-16 font-normal leading-24 text-green-100'>
@@ -41,7 +45,7 @@ const Contents = ({ contentId }: Props) => {
           <li className='keen-slider__slide' key={index}>
             <Photo
               alt='main'
-              className='h-screen'
+              className='h-[100dvh]'
               src={contentDetail.contentImageUrl}
             />
             <div className='fixed inset-0 bg-content-overlay'></div>

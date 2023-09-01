@@ -23,6 +23,7 @@ const PopularFlowers = ({ flowers }: PopularFlowersProps) => {
                     <Photo
                       alt={flower.koreanName}
                       height={108}
+                      sizes='(max-width: 440px): 100vw, 440px'
                       src={flower.imageUrl}
                       width={335}
                     />
@@ -46,6 +47,7 @@ const PopularFlowers = ({ flowers }: PopularFlowersProps) => {
                     <Photo
                       alt={flower.koreanName}
                       height={44}
+                      sizes='(max-width: 440px): 50vw, 200px'
                       src={flower.imageUrl}
                       width={164}
                     />

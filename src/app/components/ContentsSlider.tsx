@@ -69,8 +69,9 @@ const ContentsSlider = ({ contents }: ContentsSliderProps) => {
               <Link href={`/contents/${content.contentId}`}>
                 <div className='relative'>
                   <Photo
-                    alt='temp'
+                    alt={content.title}
                     height='98'
+                    sizes='(max-width: 440px): 100vw, 440px'
                     src={content.imageUrl}
                     width='158'
                   />

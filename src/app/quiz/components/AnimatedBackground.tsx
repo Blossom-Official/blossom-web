@@ -59,7 +59,7 @@ const AnimatedBackground = () => {
   );
 
   return (
-    <div className='relative h-screen overflow-hidden' ref={sliderRef}>
+    <div className='relative h-[100dvh] overflow-hidden' ref={sliderRef}>
       {images.map((src, index) => (
         <div
           className='absolute top-0 h-full w-full'

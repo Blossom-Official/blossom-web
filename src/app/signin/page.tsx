@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -21,10 +22,14 @@ export default function Signin() {
         </Link>
       </header>
 
-      <div className='relative h-screen overflow-hidden'>
-        <div className='absolute top-0 h-full w-full'>
-          <Photo alt='배경화면' src='/images/background-image.png' />
-        </div>
+      <div className='relative h-[100dvh]'>
+        <Image
+          fill
+          alt='배경화면'
+          sizes='(max-width: 440px): 100vw, 440px'
+          src='/images/background-image.png'
+          style={{ objectFit: 'cover' }}
+        />
       </div>
 
       <div className='absolute inset-0 flex flex-col items-center justify-center px-20'>
