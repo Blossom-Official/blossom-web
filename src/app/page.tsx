@@ -2,11 +2,11 @@
 import 'keen-slider/keen-slider.min.css';
 
 import { Suspense } from '@suspensive/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
 
 import { useGetHome } from '@/api/home';
-import { Photo } from '@/common/components/photo';
 import { SvgIcon } from '@/common/components/svg-icon';
 
 import {
@@ -24,15 +24,17 @@ export default function Home() {
 
   return (
     <>
-      <section className='relative h-screen'>
+      <section className='relative h-[100dvh]'>
         <header className='sticky top-0 z-[1000] flex w-full justify-between bg-transparent p-16'>
           <ProfileMenuButton />
         </header>
 
-        <Photo
+        <Image
+          fill
           alt='배경화면'
-          className='-mt-56 h-full'
+          sizes='(max-width: 440px): 100vw, 440px'
           src='/images/background-image.png'
+          style={{ objectFit: 'cover' }}
         />
 
         <div className='absolute inset-0 flex flex-col justify-center px-20'>
@@ -67,7 +69,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className='h-full min-h-screen text-white'>
+      <section className='h-full min-h-[100dvh] text-white'>
         <header
           className='sticky top-0 z-[1000] flex w-full justify-between bg-[#3E482F]/80 p-16'
           ref={headingRef}
@@ -129,7 +131,13 @@ const MainComp = () => {
                   className='absolute h-full w-full'
                   href={`/category?category=${category.query}`}
                 >
-                  <Photo alt={category.name} src={category.imageUrl} />
+                  <Image
+                    fill
+                    alt={category.name}
+                    sizes='(max-width: 440px): 25vw, 100px'
+                    src={category.imageUrl}
+                    style={{ objectFit: 'cover' }}
+                  />
                 </Link>
               </li>
             );
