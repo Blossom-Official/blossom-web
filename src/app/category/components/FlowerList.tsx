@@ -12,7 +12,7 @@ const FlowerList = () => {
     <div className='grow p-20 text-white'>
       {flowerByCategory.flowers.length === 0 ? (
         <p className='flex h-full items-center justify-center text-16-light-24 text-grey'>
-          아직 찜한 꽃이 없어요!
+          해당 카테고리에 대한 꽃이 없습니다.
         </p>
       ) : (
         <>
