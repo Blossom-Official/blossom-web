@@ -165,7 +165,7 @@ const Finish = ({ options }: FinishProps) => {
     <>
       <div className='relative h-screen overflow-hidden'>
         <div className='absolute top-0 h-full w-full'>
-          <Photo alt='background-image' src='/images/background-image.png' />
+          <Photo alt='배경화면' src='/images/background-image.png' />
         </div>
       </div>
       <div className='absolute inset-0 bg-black/50'></div>
