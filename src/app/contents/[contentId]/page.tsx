@@ -1,10 +1,8 @@
-'use client';
-
 import 'keen-slider/keen-slider.min.css';
 
 import { Suspense } from '@suspensive/react';
 
-import { Contents, Header } from './components';
+import { Contents } from './components';
 
 export default function ContentsPage({
   params,
@@ -13,10 +11,11 @@ export default function ContentsPage({
 }) {
   return (
     <>
-      <Header />
-      <Suspense.CSROnly>
-        <Contents contentId={params.contentId} />
-      </Suspense.CSROnly>
+      <section className='-mt-56 w-full'>
+        <Suspense>
+          <Contents contentId={params.contentId} />
+        </Suspense>
+      </section>
     </>
   );
 }
