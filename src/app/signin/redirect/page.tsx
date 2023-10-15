@@ -1,10 +1,12 @@
 'use client';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { AuthService, http } from '@/api/core/axios';
 import { RequestSuccess } from '@/api/core/types';
+import { useGetProfile } from '@/api/user';
 import { Loading } from '@/common/components/loading';
 
 interface Response {
@@ -14,6 +16,7 @@ interface Response {
 
 export default function Signin() {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     (async () => {
@@ -29,6 +32,10 @@ export default function Signin() {
               const { data } = response.data as RequestSuccess<Response>;
               AuthService.setAccessToken(data.accessToken);
               AuthService.setRefreshToken(data.refreshToken);
+
+              queryClient.invalidateQueries({
+                queryKey: useGetProfile.queryKey,
+              });
 
               router.push('/');
             })
@@ -54,7 +61,7 @@ export default function Signin() {
         }
       }
     })();
-  }, [router]);
+  }, [router, queryClient]);
 
   return (
     <section className='flex h-[100dvh] items-center justify-center'>

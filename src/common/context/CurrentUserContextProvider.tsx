@@ -22,7 +22,11 @@ export const CurrentUserContextProvider = ({
   const currentUserQuery = useGetProfile();
 
   if (currentUserQuery.isLoading) {
-    return <Loading />;
+    return (
+      <div className='h-100 w-100'>
+        <Loading />
+      </div>
+    );
   }
 
   if (currentUserQuery.isError) {
