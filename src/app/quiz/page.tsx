@@ -8,10 +8,11 @@ import { useGetRecommend } from '@/api/flower-recommend';
 import { Loading } from '@/common/components/loading';
 import { Photo } from '@/common/components/photo';
 import { SvgIcon } from '@/common/components/svg-icon';
-import { useStep, useTimeout } from '@/common/hooks';
+import { useAuth, useStep, useTimeout } from '@/common/hooks';
 
 import {
   AnimatedBackground,
+  Header,
   Quiz1,
   Quiz2,
   Quiz3,
@@ -22,7 +23,8 @@ import {
 import { Options, useSelectOptions } from './hooks';
 
 const QuizPage = () => {
-  const { step, setStep, nextStep, prevStep } = useStep([
+  const auth = useAuth();
+  const [step, setStep, prevStep] = useStep([
     'intro',
     'quiz-1',
     'quiz-2',
@@ -30,22 +32,19 @@ const QuizPage = () => {
     'quiz-4',
     'quiz-5',
     'finish',
-  ]);
+  ] as const);
 
-  const { options, handleSelect } = useSelectOptions({
-    onSelect: () => nextStep(),
-  });
+  const { selections, handleSelect } = useSelectOptions();
 
   return (
     <>
-      <header className='absolute z-[1000] flex w-full justify-between bg-transparent p-16'>
-        <Link href='/'>
-          <SvgIcon height='24' id='left-arrow' width='24' />
-        </Link>
-      </header>
-
       {step === 'intro' && (
         <>
+          <Header>
+            <Link href='/'>
+              <SvgIcon height='24' id='left-arrow' width='24' />
+            </Link>
+          </Header>
           <AnimatedBackground />
           <div className='absolute inset-0 bg-black/60'></div>
           <div className='absolute inset-0 flex flex-col items-center justify-center gap-40 text-white'>
@@ -62,7 +61,7 @@ const QuizPage = () => {
             <button
               className='h-48 w-181 bg-pink-100 text-center text-16 font-medium leading-24 text-pink-200'
               type='button'
-              onClick={() => setStep('quiz-1')}
+              onClick={auth.validate(() => setStep('quiz-1'))}
             >
               시작하기
             </button>
@@ -71,62 +70,128 @@ const QuizPage = () => {
       )}
 
       {step === 'quiz-1' && (
-        <section className='flex flex-col px-20 pb-20 pt-56'>
-          <Step step={1} />
-          <p className='mb-32 mt-22 text-24 font-bold leading-32 text-white'>
-            선물 받는 상대와의 관계가 어떻게 되시나요?
-          </p>
-          <Quiz1 value={options['relationship']} onSelect={handleSelect} />
-        </section>
+        <>
+          <Header>
+            <button type='button' onClick={prevStep}>
+              <SvgIcon height='24' id='left-arrow' width='24' />
+            </button>
+          </Header>
+          <section className='flex h-[100dvh] flex-col px-20 pb-20 pt-56'>
+            <Step step={1} />
+            <p className='mb-32 mt-22 text-24 font-bold leading-32 text-white'>
+              선물 받는 상대와의 관계가 어떻게 되시나요?
+            </p>
+            <Quiz1
+              value={selections['relationship']}
+              onClickNext={() => setStep('quiz-2')}
+              onSelect={handleSelect}
+            />
+          </section>
+        </>
       )}
 
       {step === 'quiz-2' && (
-        <section className='flex flex-col px-20 pb-20 pt-56'>
-          <Step step={2} />
-          <p className='mb-32 mt-22 text-24 font-bold leading-32 text-white'>
-            상대방의 나이대를 알려주세요.
-          </p>
-          <Quiz2 value={options['age']} onSelect={handleSelect} />
-          <BackButton onClick={prevStep} />
-        </section>
+        <>
+          <Header>
+            <button type='button' onClick={prevStep}>
+              <SvgIcon height='24' id='left-arrow' width='24' />
+            </button>
+          </Header>
+          <section className='flex h-[100dvh] flex-col px-20 pb-20 pt-56'>
+            <Step step={2} />
+            <p className='mb-32 mt-22 text-24 font-bold leading-32 text-white'>
+              상대방의 나이대를 알려주세요.
+            </p>
+            <Quiz2
+              value={selections['age']}
+              onClickNext={() => setStep('quiz-3')}
+              onSelect={handleSelect}
+            />
+            <BackButton onClick={prevStep} />
+          </section>
+        </>
       )}
 
       {step === 'quiz-3' && (
-        <section className='flex flex-col px-20 pb-20 pt-56'>
-          <Step step={3} />
-          <p className='mb-32 mt-22 text-24 font-bold leading-32 text-white'>
-            상대에게 전하고 싶은 마음이 있나요?
-          </p>
-          <Quiz3 value={options['mind']} onSelect={handleSelect} />
-          <BackButton onClick={prevStep} />
-        </section>
+        <>
+          <Header>
+            <button type='button' onClick={prevStep}>
+              <SvgIcon height='24' id='left-arrow' width='24' />
+            </button>
+          </Header>
+          <section className='flex h-[100dvh] flex-col px-20 pb-20 pt-56'>
+            <Step step={3} />
+            <p className='mt-22 text-24 font-bold leading-32 text-white'>
+              상대에게 전하고 싶은 마음이 있나요?
+            </p>
+            <p className='mb-32 text-12 leading-20 text-white'>
+              전하고 싶은 메시지가 담긴 꽃말을 가진 꽃 추천을 돕는 문항으로,
+              꽃을 선물하는 의미에 대해 생각해보아요!
+            </p>
+            <Quiz3
+              value={selections['mind']}
+              onClickNext={() => setStep('quiz-4')}
+              onSelect={handleSelect}
+            />
+            <BackButton onClick={prevStep} />
+          </section>
+        </>
       )}
 
       {step === 'quiz-4' && (
-        <section className='flex flex-col px-20 pb-20 pt-56'>
-          <Step step={4} />
-          <p className='mb-32 mt-22 text-24 font-bold leading-32 text-white'>
-            상대가 좋아하거나 어울리는 색이 있나요?
-          </p>
-          <Quiz4 value={options['color']} onSelect={handleSelect} />
-          <BackButton onClick={prevStep} />
-        </section>
+        <>
+          <Header>
+            <button type='button' onClick={prevStep}>
+              <SvgIcon height='24' id='left-arrow' width='24' />
+            </button>
+          </Header>
+          <section className='flex flex-col px-20 pb-20 pt-56'>
+            <Step step={4} />
+            <p className='mt-22 text-24 font-bold leading-32 text-white'>
+              상대가 좋아하거나 어울리는 색이 있나요?
+            </p>
+            <p className='mb-32 text-12 leading-20 text-white'>
+              꽃 조합의 메인 색상을 결정하는 문항으로, 상황이나 이벤트에 맞는
+              색으로 골라주세요!
+            </p>
+            <Quiz4
+              value={selections['color']}
+              onClickNext={() => setStep('quiz-5')}
+              onSelect={handleSelect}
+            />
+            <BackButton onClick={prevStep} />
+          </section>
+        </>
       )}
 
       {step === 'quiz-5' && (
-        <section className='flex flex-col px-20 pb-20 pt-56'>
-          <Step step={5} />
-          <p className='mb-32 mt-22 text-24 font-bold leading-32 text-white'>
-            당신이 생각하는 상대는 어떤 분위기를 가졌나요?
-          </p>
-          <Quiz5 value={options['vibe']} onSelect={handleSelect} />
-          <BackButton onClick={prevStep} />
-        </section>
+        <>
+          <Header>
+            <button type='button' onClick={prevStep}>
+              <SvgIcon height='24' id='left-arrow' width='24' />
+            </button>
+          </Header>
+          <section className='flex flex-col px-20 pb-20 pt-56'>
+            <Step step={5} />
+            <p className='mt-22 text-24 font-bold leading-32 text-white'>
+              당신이 생각하는 상대는 어떤 분위기를 가졌나요?
+            </p>
+            <p className='mb-32 text-12 leading-20 text-white'>
+              좋아하는 계절이나 생일의 계절도 좋아요!
+            </p>
+            <Quiz5
+              value={selections['season']}
+              onClickNext={() => setStep('finish')}
+              onSelect={handleSelect}
+            />
+            <BackButton onClick={prevStep} />
+          </section>
+        </>
       )}
 
       {step === 'finish' && (
         <Suspense.CSROnly>
-          <Finish options={options} />
+          <Finish options={selections} />
         </Suspense.CSROnly>
       )}
     </>
