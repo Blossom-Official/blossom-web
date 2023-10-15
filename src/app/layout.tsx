@@ -2,6 +2,7 @@ import './globals.css';
 
 import localFont from 'next/font/local';
 
+import { CurrentUserContextProvider } from '@/common/context';
 import { OverlayProvider } from '@/common/hooks';
 import { QueryClientProvider } from '@/common/react-query';
 
@@ -58,9 +59,11 @@ export default function RootLayout({
       <link as='image' href='/sprite.svg' rel='preload' type='image/svg+xml' />
       <body className={`${lemonMilk.variable} ${pretendard.variable}`}>
         <QueryClientProvider>
-          <main className='relative mx-auto h-fit min-h-full max-w-[44rem] bg-green-400 font-pretendard shadow-lg'>
-            <OverlayProvider>{children}</OverlayProvider>
-          </main>
+          <CurrentUserContextProvider>
+            <main className='relative mx-auto h-fit min-h-full max-w-[44rem] bg-green-400 font-pretendard shadow-lg'>
+              <OverlayProvider>{children}</OverlayProvider>
+            </main>
+          </CurrentUserContextProvider>
         </QueryClientProvider>
       </body>
     </html>

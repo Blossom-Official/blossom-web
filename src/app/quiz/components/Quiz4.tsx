@@ -2,12 +2,7 @@
 
 import clsx from 'clsx';
 
-import { OptionKey, Options } from '../hooks';
-
-interface Quiz4Props {
-  value: Options['color'];
-  onSelect: <T extends OptionKey>(key: T, value: Options[T]) => void;
-}
+import { HandleSelectFn, Options } from '../hooks';
 
 const quiz4 = [
   {
@@ -33,7 +28,13 @@ const quiz4 = [
   },
 ] as const;
 
-const Quiz4 = ({ value: selectedValue, onSelect }: Quiz4Props) => {
+interface Quiz4Props {
+  value: Options['color'];
+  onSelect: HandleSelectFn;
+  onClickNext?: () => void;
+}
+
+const Quiz4 = ({ value: selectedValue, onSelect, onClickNext }: Quiz4Props) => {
   return (
     <ul className='grid grid-cols-2 gap-12 text-white'>
       {quiz4.map(({ id, label, value, colors }) => {
@@ -48,7 +49,9 @@ const Quiz4 = ({ value: selectedValue, onSelect }: Quiz4Props) => {
             <button
               className='relative h-full w-full'
               type='button'
-              onClick={() => onSelect('color', value)}
+              onClick={() =>
+                onSelect('color', value, { onChangeSelection: onClickNext })
+              }
             >
               <div className='absolute right-16 top-12 flex gap-8'>
                 {colors.map((color, index) => (

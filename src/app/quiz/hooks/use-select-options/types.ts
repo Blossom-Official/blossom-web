@@ -15,14 +15,20 @@ export type Color =
   | 'BLUE_PURPLE'
   | 'PINK'
   | 'ACHROMATIC';
-export type Vibe = 'COLD_HAUGHTY' | 'BRIGHT_LOVELY' | 'QUIET_CALM' | 'ACTIVE';
+export type Season = 'SPRING' | 'SUMMER' | 'AUTUMN' | 'WINTER';
 
 export interface Options {
   relationship: Relationship | Noop;
   age: Age | Noop;
   mind: Mind | Noop;
   color: Color | Noop;
-  vibe: Vibe | Noop;
+  season: Season | Noop;
 }
 
 export type OptionKey = keyof Options;
+
+export type HandleSelectFn = <T extends OptionKey>(
+  key: T,
+  value: Options[T],
+  options?: { onChangeSelection?: () => void }
+) => void;

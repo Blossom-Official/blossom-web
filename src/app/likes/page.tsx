@@ -1,9 +1,7 @@
 'use client';
 
-import { QueryAsyncBoundary } from '@suspensive/react-query';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { useDeleteFlowerLikes } from '@/api/flower-like';
 import { SvgIcon } from '@/common/components/svg-icon';
@@ -13,7 +11,6 @@ import { LikesList } from './components';
 import { useSelectItem } from './hooks';
 
 export default function LikesPage() {
-  const router = useRouter();
   const [editMode, handleEditMode] = useToggle();
   const select = useSelectItem();
   const deleteFlowerLikes = useDeleteFlowerLikes(select.items);
@@ -60,18 +57,11 @@ export default function LikesPage() {
         </div>
       </header>
 
-      <QueryAsyncBoundary
-        rejectedFallback={(boundary) => (
-          <button onClick={boundary.reset}>Try again</button>
-        )}
-        onError={() => router.push('/signin')}
-      >
-        <LikesList
-          editMode={editMode}
-          isSelected={select.isSelected}
-          onSelect={select.selectItem}
-        />
-      </QueryAsyncBoundary>
+      <LikesList
+        editMode={editMode}
+        isSelected={select.isSelected}
+        onSelect={select.selectItem}
+      />
 
       {editMode && (
         <button

@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 import { AuthService, http } from '@/api/core/axios';
 import { RequestSuccess } from '@/api/core/types';
+import { Loading } from '@/common/components/loading';
 
 interface Response {
   accessToken: string;
@@ -55,7 +56,13 @@ export default function Signin() {
     })();
   }, [router]);
 
-  return <></>;
+  return (
+    <section className='flex h-[100dvh] items-center justify-center'>
+      <div className='w-100'>
+        <Loading />
+      </div>
+    </section>
+  );
 }
 
 const getKakaoToken = async (code: string) => {

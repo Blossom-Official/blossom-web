@@ -7,6 +7,7 @@ import { useGetFlowerDetail } from '@/api/flower';
 import { useGetFlowerLikeById, usePostFlowerLike } from '@/api/flower-like';
 import { Photo } from '@/common/components/photo';
 import { SvgIcon } from '@/common/components/svg-icon';
+import { useAuth } from '@/common/hooks';
 
 import { Header } from './components';
 
@@ -195,14 +196,23 @@ const Contents = ({ flowerId }: Props) => {
 };
 
 const LikeButton = ({ flowerId }: { flowerId: string }) => {
-  const {
-    data: { isCheck },
-  } = useGetFlowerLikeById(Number(flowerId));
-  const { handleFlowerLike } = usePostFlowerLike(Number(flowerId), isCheck);
+  const auth = useAuth();
+  const { data } = useGetFlowerLikeById(Number(flowerId), {
+    enabled: auth.isLogin,
+  });
+
+  const { handleFlowerLike } = usePostFlowerLike(
+    Number(flowerId),
+    data?.isCheck
+  );
   return (
-    <button className='' type='button' onClick={handleFlowerLike}>
+    <button
+      className=''
+      type='button'
+      onClick={auth.validate(handleFlowerLike)}
+    >
       <SvgIcon
-        fill={`${isCheck ? '#FFCBF1' : 'none'}`}
+        fill={`${data?.isCheck ? '#FFCBF1' : 'none'}`}
         height='24'
         id='heart'
         width='24'
