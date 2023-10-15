@@ -20,6 +20,7 @@
     "@types/react-dom": "18.2.4",
     "axios": "^1.4.0",
     "clsx": "^1.2.1",
+    "cookies-next": "^4.0.0",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "keen-slider": "^6.8.6",

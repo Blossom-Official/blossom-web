@@ -1,5 +1,4 @@
-import { useSuspenseQuery } from '@suspensive/react-query';
-import { useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 import { authHttp } from '../core/axios';
@@ -7,7 +6,7 @@ import { RequestError, RequestState } from '../core/types';
 
 export const useGetProfile = () => {
   const queryClient = useQueryClient();
-  return useSuspenseQuery({
+  return useQuery({
     queryKey: useGetProfile.queryKey,
     queryFn: useGetProfile.queryFn,
     staleTime: Infinity,
@@ -21,7 +20,7 @@ export const useGetProfile = () => {
   });
 };
 
-type Response = {
+export type Response = {
   nickname: string;
   isDefaultProfileImage: boolean;
   profileImageUrl: string;
@@ -31,7 +30,7 @@ type Response = {
     englishName: string;
     imageUrl: string;
   }[];
-} | null;
+};
 
 useGetProfile.queryKey = ['profile'] as const;
 useGetProfile.queryFn = () =>

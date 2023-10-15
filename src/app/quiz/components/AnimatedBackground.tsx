@@ -1,9 +1,8 @@
 'use client';
 
 import { useKeenSlider } from 'keen-slider/react';
+import Image from 'next/image';
 import { useState } from 'react';
-
-import { Photo } from '@/common/components/photo';
 
 const images = [
   '/images/flower-1.png',
@@ -66,7 +65,12 @@ const AnimatedBackground = () => {
           key={index}
           style={{ opacity: opacities[index] }}
         >
-          <Photo alt={`flower-${index + 1}`} src={src} />
+          <Image
+            fill
+            alt={`flower-${index + 1}`}
+            src={src}
+            style={{ objectFit: 'cover' }}
+          />
         </div>
       ))}
     </div>

@@ -2,38 +2,33 @@
 
 import { useState } from 'react';
 
-export const useStep = (steps: string[]) => {
-  const [step, setStep] = useState(steps[0]);
+type NonEmptyArray<T> = readonly [T, ...T[]];
 
-  const set = (nextStep: string) => {
-    const stepIndex = steps.indexOf(nextStep);
-    if (stepIndex === -1) {
-      assertStep(step);
-      return;
-    }
-    setStep(nextStep);
+export type UseStepReturn<Steps extends NonEmptyArray<string>> = readonly [
+  Steps[number],
+  (step: Steps[number]) => void,
+  () => void
+];
+
+export const useStep = <Steps extends NonEmptyArray<string>>(
+  steps: Steps,
+  options?: {
+    initialStep?: Steps[number];
+  }
+): UseStepReturn<Steps> => {
+  const initial = options?.initialStep ?? (steps[0] as Steps[number]);
+  const [stack, setStack] = useState<Steps[number][]>([initial]);
+
+  const setStep = (step: Steps[number]) => {
+    assertString(step);
+    setStack((prev) => [...prev].concat(step));
   };
-
-  const nextStep = () => {
-    const stepIndex = steps.indexOf(step);
-    const newStep = steps[stepIndex + 1];
-    assertString(newStep);
-    setStep(newStep);
-  };
-
   const prevStep = () => {
-    const stepIndex = steps.indexOf(step);
-    const newStep = steps[stepIndex - 1];
-    assertString(newStep);
-    setStep(newStep);
+    if (stack.length === 1) return;
+    setStack((prev) => prev.slice(0, prev.length - 1));
   };
-
-  return { step, setStep: set, nextStep, prevStep } as const;
+  return [stack[stack.length - 1], setStep, prevStep] as const;
 };
-
-function assertStep(step: string) {
-  throw new Error(`${step} is not part of the step.`);
-}
 
 function assertString(value: unknown): asserts value is string {
   if (typeof value !== 'string') {

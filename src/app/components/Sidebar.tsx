@@ -4,11 +4,10 @@ import Link from 'next/link';
 import { memo } from 'react';
 
 import { useLogout } from '@/api/auth';
-import { useGetProfile } from '@/api/user';
 import { Menu } from '@/common/components/menu';
 import { Photo } from '@/common/components/photo';
 import { SvgIcon } from '@/common/components/svg-icon';
-import { useOverlay } from '@/common/hooks';
+import { useAuth, useOverlay } from '@/common/hooks';
 
 import EditProfileName from './EditProfileName';
 
@@ -18,7 +17,7 @@ interface Props {
 }
 
 const Sidebar = ({ isOpen, onClose }: Props) => {
-  const { data } = useGetProfile();
+  const { isLogin, user } = useAuth();
   return (
     <Menu
       className='bg-[#2A2E24]/80 backdrop-blur-sm'
@@ -37,17 +36,17 @@ const Sidebar = ({ isOpen, onClose }: Props) => {
             width='109'
           />
           <p className='text-20-semibold-24 text-white'>
-            {data ? (
+            {isLogin ? (
               <>
-                <EditProfileNameButton name={data.nickname} />
+                <EditProfileNameButton name={user.nickname} />
               </>
             ) : (
               '로그인 후 사용해주세요!'
             )}
           </p>
-          {data ? <LogoutButton /> : <LoginButton />}
+          {isLogin ? <LogoutButton /> : <LoginButton />}
 
-          {data && (
+          {isLogin && (
             <div className='flex w-full justify-between font-lemon-milk'>
               <span className='text-16-light-24 text-white'>LIKES</span>
               <Link
@@ -68,13 +67,13 @@ const Sidebar = ({ isOpen, onClose }: Props) => {
             </div>
           )}
         </Menu.Item>
-        {data && (
+        {user && (
           <Menu.Item className='flex flex-col gap-10 overflow-x-auto border-b border-b-white py-16 font-lemon-milk text-16-light-24 text-white'>
-            {data.flowers.length === 0 ? (
+            {user.flowers.length === 0 ? (
               <p>모아둔 꽃이 없습니다.</p>
             ) : (
               <ul className='flex w-fit gap-12'>
-                {data.flowers.map((flower) => {
+                {user.flowers.map((flower) => {
                   return (
                     <li className='h-98 w-98' key={flower.flowerId}>
                       <Link

@@ -1,1 +1,2 @@
-export { default as QueryClientProvider } from './query-client';
+export { default as getQueryClient } from './getQueryClient';
+export { default as QueryClientProvider } from './QueryClientProvider';

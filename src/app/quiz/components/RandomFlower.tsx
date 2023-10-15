@@ -1,9 +1,9 @@
 'use client';
 
 import { useKeenSlider } from 'keen-slider/react';
+import Image from 'next/image';
 import { useState } from 'react';
 
-import { Photo } from '@/common/components/photo';
 import { SvgIcon } from '@/common/components/svg-icon';
 
 const images = [
@@ -67,7 +67,13 @@ const RandomFlower = () => {
           key={index}
           style={{ opacity: currentSlide === index ? 1 : 0 }}
         >
-          <Photo alt={`flower-${index + 4}`} className='w-250' src={src} />
+          <Image
+            fill
+            alt={`flower-${index + 4}`}
+            className='w-250'
+            src={src}
+            style={{ objectFit: 'cover' }}
+          />
         </div>
       ))}
       <SvgIcon className='relative' height='80' id='question-mark' width='42' />

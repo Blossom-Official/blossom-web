@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useState } from 'react';
 
 const mapToArray = (arg: Map<unknown, unknown>) => {

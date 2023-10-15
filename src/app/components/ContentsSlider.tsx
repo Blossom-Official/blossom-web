@@ -62,7 +62,7 @@ const ContentsSlider = ({ contents }: ContentsSliderProps) => {
         {contents.map((content) => {
           return (
             <li
-              className='keen-slider__slide'
+              className='keen-slider__slide min-w-full max-w-full'
               data-item-id={content.contentId}
               key={content.contentId}
             >

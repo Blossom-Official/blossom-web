@@ -5,11 +5,15 @@ import type {
   AxiosRequestConfig,
 } from 'axios';
 import axios, { isAxiosError } from 'axios';
+import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 
 import { RequestError, RequestState } from './types';
 
 const serviceEndpoint = process.env.NEXT_PUBLIC_SERVICE_ENDPOINT;
 const serviceSubfix = process.env.NEXT_PUBLIC_SERVICE_API_SUBFIX;
+
+const accessTokenKey = process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY;
+const refreshTokenKey = process.env.NEXT_PUBLIC_REFRESH_TOKEN_KEY;
 
 const axiosInstance = axios.create({
   baseURL: `${serviceEndpoint}${serviceSubfix}`,
@@ -88,31 +92,31 @@ interface Response {
 
 export const AuthService = {
   setAccessToken: (accessToken: string) => {
-    localStorage.setItem('accessToken', accessToken);
+    setCookie(accessTokenKey, accessToken);
     authAxiosInstance.defaults.headers.common[
       'Authorization'
     ] = `Bearer ${accessToken}`;
   },
 
   getAccessToken: () => {
-    return localStorage.getItem('accessToken');
+    return getCookie(accessTokenKey);
   },
 
   deleteAccessToken: () => {
-    localStorage.removeItem('accessToken'),
-      delete authAxiosInstance.defaults.headers.common['Authorization'];
+    deleteCookie(accessTokenKey);
+    delete authAxiosInstance.defaults.headers.common['Authorization'];
   },
 
   setRefreshToken: (refreshToken: string) => {
-    localStorage.setItem('refreshToken', refreshToken);
+    setCookie(refreshTokenKey, refreshToken);
   },
 
   getRefreshToken: () => {
-    return localStorage.getItem('refreshToken');
+    return getCookie(refreshTokenKey);
   },
 
   deleteRefreshToken: () => {
-    localStorage.removeItem('refreshToken');
+    deleteCookie(refreshTokenKey);
   },
 
   logout: () => {

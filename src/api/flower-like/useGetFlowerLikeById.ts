@@ -3,7 +3,10 @@ import { useSuspenseQuery } from '@suspensive/react-query';
 import { authHttp } from '../core/axios';
 import { RequestSuccess } from '../core/types';
 
-export const useGetFlowerLikeById = (flowerId: number) => {
+export const useGetFlowerLikeById = (
+  flowerId: number,
+  options?: { enabled: boolean }
+) => {
   return useSuspenseQuery({
     queryKey: useGetFlowerLikeById.queryKey(flowerId),
     queryFn: () => useGetFlowerLikeById.queryFn(flowerId),
@@ -11,6 +14,7 @@ export const useGetFlowerLikeById = (flowerId: number) => {
       const { data } = response.data;
       return data;
     },
+    ...options,
   });
 };
 

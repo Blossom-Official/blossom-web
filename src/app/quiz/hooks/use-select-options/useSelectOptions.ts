@@ -2,26 +2,27 @@
 
 import { useState } from 'react';
 
-import { OptionKey, Options } from './types';
+import { HandleSelectFn, OptionKey, Options } from './types';
 
 const initialState: Options = {
   relationship: 'NOOP',
   age: 'NOOP',
   mind: 'NOOP',
   color: 'NOOP',
-  vibe: 'NOOP',
+  season: 'NOOP',
 };
 
-interface UseOptionsProps {
-  onSelect?: () => unknown;
-}
-export const useSelectOptions = ({ onSelect }: UseOptionsProps) => {
-  const [options, setOptions] = useState<Options>(initialState);
+export const useSelectOptions = () => {
+  const [selections, setSelections] = useState<Options>(initialState);
 
-  const handleSelect = <T extends OptionKey>(key: T, value: Options[T]) => {
-    setOptions((prev) => ({ ...prev, [key]: value }));
-    onSelect?.();
+  const handleSelect: HandleSelectFn = <T extends OptionKey>(
+    key: T,
+    value: Options[T],
+    options?: { onChangeSelection?: () => void }
+  ) => {
+    setSelections((prev) => ({ ...prev, [key]: value }));
+    options?.onChangeSelection?.();
   };
 
-  return { options, handleSelect } as const;
+  return { selections, handleSelect } as const;
 };
