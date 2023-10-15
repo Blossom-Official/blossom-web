@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useGetContentById } from '../content';
 import { authHttp } from '../core/axios';
+import { useGetProfile } from '../user';
 import { useGetFlowerLikes } from './useGetFlowerLikes';
 
 export const usePostFlowerLike = (flowerId: number, isCheck: boolean) => {
@@ -16,6 +17,7 @@ export const usePostFlowerLike = (flowerId: number, isCheck: boolean) => {
       queryClient.invalidateQueries({
         queryKey: useGetContentById.queryKey(flowerId),
       });
+      queryClient.invalidateQueries({ queryKey: useGetProfile.queryKey });
     },
   });
   const handleFlowerLike = () => {

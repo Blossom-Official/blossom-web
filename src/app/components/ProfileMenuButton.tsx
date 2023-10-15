@@ -1,7 +1,5 @@
 'use client';
 
-import { Suspense } from '@suspensive/react';
-
 import { SvgIcon } from '@/common/components/svg-icon';
 import { useOverlay } from '@/common/hooks';
 
@@ -15,9 +13,7 @@ const ProfileMenuButton = () => {
       type='button'
       onClick={() => {
         overlay.open(({ isOpen, close }) => (
-          <Suspense.CSROnly>
-            <Sidebar isOpen={isOpen} onClose={close} />
-          </Suspense.CSROnly>
+          <Sidebar isOpen={isOpen} onClose={close} />
         ));
       }}
     >

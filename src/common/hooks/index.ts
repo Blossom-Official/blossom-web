@@ -1,4 +1,5 @@
 export * from './use-overlay';
+export * from './useAuth';
 export * from './useCopyToClipboard';
 export * from './useInputState';
 export * from './useIsomorphicLayoutEffect';
