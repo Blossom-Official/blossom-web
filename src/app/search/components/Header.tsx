@@ -11,8 +11,13 @@ const Header = () => {
   const router = useRouter();
 
   return (
-    <header className={clsx('flex p-16', [!!searchText && 'bg-green-200'])}>
-      <button type='button' onClick={() => router.back()}>
+    <header
+      className={clsx('z-[1000] flex p-16', [!!searchText && 'bg-green-200'])}
+    >
+      <button
+        type='button'
+        onClick={() => router.push(searchText ? '/search' : '/')}
+      >
         <SvgIcon height='24' id='left-arrow' width='24' />
       </button>
     </header>

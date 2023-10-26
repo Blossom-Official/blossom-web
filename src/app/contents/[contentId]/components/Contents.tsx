@@ -26,7 +26,6 @@ const Contents = ({ contentId }: Props) => {
           sizes='(max-width: 440px): 100vw, 440px'
           src={content.contentImageUrl}
         />
-        <div className='absolute inset-0 bg-content-overlay'></div>
         <section className='absolute bottom-85 px-20'>
           <div className='text-16 font-normal leading-24 text-green-100'>
             {content.postedAt}
@@ -50,8 +49,6 @@ const Contents = ({ contentId }: Props) => {
               sizes='(max-width: 440px): 100vw, 440px'
               src={contentDetail.contentImageUrl}
             />
-            <div className='absolute inset-0 bg-content-overlay'></div>
-
             <section className='absolute top-85 px-20 font-medium text-grey'>
               <h2 className='text-16 leading-24'>{content.subtitle}</h2>
               <h1 className='font-lemon-milk text-20 leading-24'>
@@ -94,7 +91,6 @@ const Contents = ({ contentId }: Props) => {
           sizes='(max-width: 440px): 100vw, 440px'
           src={content.contentImageUrl}
         />
-        <div className='absolute inset-0 bg-content-overlay'></div>
         <div className='absolute inset-0 overflow-y-auto pb-20'>
           <section className='mt-85 px-20 font-medium text-grey'>
             <h2 className='text-16 leading-24'>{content.subtitle}</h2>

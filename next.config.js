@@ -4,7 +4,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'source.unsplash.com',
+        hostname: 'blossom-public-dev.s3.ap-northeast-2.amazonaws.com',
+        port: '',
+        // pathname: '/**',
       },
     ],
   },
