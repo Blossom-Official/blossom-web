@@ -11,7 +11,7 @@ interface Props {
   contentId: string;
 }
 const Contents = ({ contentId }: Props) => {
-  const { data: content } = useGetContentById(Number(contentId));
+  const { data: content } = useGetContentById(contentId);
   const [sliderRef] = useKeenSlider({
     slides: {
       origin: 'center',
