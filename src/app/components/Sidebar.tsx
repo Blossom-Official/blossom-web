@@ -10,6 +10,7 @@ import { SvgIcon } from '@/common/components/svg-icon';
 import { useAuth, useOverlay } from '@/common/hooks';
 
 import EditProfileName from './EditProfileName';
+import ProfileImageActionSheet from './ProfileImageActionSheet';
 
 interface Props {
   isOpen: boolean;
@@ -17,7 +18,9 @@ interface Props {
 }
 
 const Sidebar = ({ isOpen, onClose }: Props) => {
-  const { isLogin, user } = useAuth();
+  const { isLogin, user, validate: authValidate } = useAuth();
+  const overlay = useOverlay();
+
   return (
     <Menu
       className='bg-[#2A2E24]/80 backdrop-blur-sm'
@@ -26,15 +29,25 @@ const Sidebar = ({ isOpen, onClose }: Props) => {
     >
       <Menu.Header className='h-50 px-20 pt-20' />
       <Menu.List className='flex flex-col px-20'>
-        <Menu.Item className='relative flex flex-col items-center gap-24 border-b border-b-white pt-16'>
-          <SvgIcon
-            aria-labelledby='기본 프로필 이미지'
-            className='mb-16'
-            height='109'
-            id='polygon'
-            role='img'
-            width='109'
-          />
+        <Menu.Item className='relative flex flex-col items-center gap-24 pt-16'>
+          <button
+            type='button'
+            onClick={authValidate(() => {
+              overlay.open(({ isOpen, close }) => (
+                <ProfileImageActionSheet isOpen={isOpen} onClose={close} />
+              ));
+            })}
+          >
+            <SvgIcon
+              aria-labelledby='기본 프로필 이미지'
+              className='mb-16'
+              height='109'
+              id='polygon'
+              role='img'
+              width='109'
+            />
+          </button>
+
           <p className='text-20-semibold-24 text-white'>
             {isLogin ? (
               <>
@@ -45,9 +58,10 @@ const Sidebar = ({ isOpen, onClose }: Props) => {
             )}
           </p>
           {isLogin ? <LogoutButton /> : <LoginButton />}
-
-          {isLogin && (
-            <div className='flex w-full justify-between font-lemon-milk'>
+        </Menu.Item>
+        {isLogin && (
+          <Menu.Item className='flex flex-col gap-10 overflow-x-auto py-16 font-lemon-milk text-16-light-24 text-white'>
+            <div className='flex w-full justify-between border-b border-b-white font-lemon-milk'>
               <span className='text-16-light-24 text-white'>LIKES</span>
               <Link
                 className='flex items-center gap-2 text-14-light-24 text-green-100'
@@ -65,10 +79,6 @@ const Sidebar = ({ isOpen, onClose }: Props) => {
                 />
               </Link>
             </div>
-          )}
-        </Menu.Item>
-        {user && (
-          <Menu.Item className='flex flex-col gap-10 overflow-x-auto border-b border-b-white py-16 font-lemon-milk text-16-light-24 text-white'>
             {user.flowers.length === 0 ? (
               <p>모아둔 꽃이 없습니다.</p>
             ) : (
@@ -101,7 +111,7 @@ const Sidebar = ({ isOpen, onClose }: Props) => {
             )}
           </Menu.Item>
         )}
-        <Menu.Item className='flex flex-col gap-10 border-b border-b-white py-16 font-lemon-milk text-16-light-24 text-white'>
+        <Menu.Item className='flex flex-col gap-10 border-y border-y-white py-16 font-lemon-milk text-16-light-24 text-white'>
           <p>ABOUT BLOSSOM</p>
           <p>HOW TO USE</p>
         </Menu.Item>
