@@ -247,15 +247,10 @@ const Finish = ({ options }: FinishProps) => {
           ) : (
             <>
               <div className='text-center'>
-                {/* <Photo
-                  alt={recommend.koreanName}
-                  className='mb-32'
-                  src={recommend.imageUrl}
-                /> */}
                 <Photo
                   alt={recommend.koreanName}
                   className='mb-32'
-                  src='/images/flower-5.png'
+                  src={recommend.imageUrl}
                 />
                 <div className='mb-17'>
                   <p className='text-24 font-extrabold'>
