@@ -45,7 +45,7 @@ const 검색결과 = () => {
         <h3 className='mb-16 border-b-2 border-white font-lemon-milk text-16 font-normal leading-24 text-white'>
           FLOWERS
         </h3>
-        <ul className='grid grid-cols-2 gap-20'>
+        <ul className='grid grid-cols-2 gap-20 text-white'>
           {flowers.map((flower) => (
             <li data-item-id={flower.flowerId} key={flower.flowerId}>
               <Link href={`/flowers/${flower.flowerId}`}>
@@ -75,7 +75,7 @@ const 검색결과 = () => {
         <h3 className='mb-16 border-b-2 border-white font-lemon-milk text-16 font-normal leading-24 text-white'>
           CONTENTS
         </h3>
-        <ul className='flex flex-col gap-20'>
+        <ul className='flex flex-col gap-20 text-white'>
           {contentSummaryInfos.map((content) => (
             <li data-item-id={content.contentId} key={content.contentId}>
               <Link href={`/contents/${content.contentId}`}>

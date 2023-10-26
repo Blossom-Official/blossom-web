@@ -35,7 +35,7 @@ const SearchForm = () => {
   const hasSearchText = useSearchParams().get('q');
 
   return (
-    <section className='sticky top-0'>
+    <section className='sticky top-0 z-[1000]'>
       <div {...getRootProps()}>
         <form
           onSubmit={(e) => {

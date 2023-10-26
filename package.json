@@ -23,6 +23,7 @@
     "cookies-next": "^4.0.0",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
+    "framer-motion": "^10.16.4",
     "keen-slider": "^6.8.6",
     "lottie-web": "^5.12.2",
     "next": "13.4.1",

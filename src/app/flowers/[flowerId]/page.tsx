@@ -201,10 +201,7 @@ const LikeButton = ({ flowerId }: { flowerId: string }) => {
     enabled: auth.isLogin,
   });
 
-  const { handleFlowerLike } = usePostFlowerLike(
-    Number(flowerId),
-    data?.isCheck
-  );
+  const { handleFlowerLike } = usePostFlowerLike(flowerId, data?.isCheck);
   return (
     <button
       className=''
